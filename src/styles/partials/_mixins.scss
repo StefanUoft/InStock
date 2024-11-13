@@ -141,3 +141,50 @@
     line-height: 1.125rem;
 }
 }
+@mixin button {
+  font-family: $titillium;
+  width: fit-content;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 1.25rem;
+}
+@mixin button-primary {
+  @include button;
+  color: $white-color;
+  background-color: $indigo-color;
+  &:hover {
+    cursor: pointer;
+    background-color: $graphite-color;
+  }
+}
+
+@mixin button-secondary {
+  @include button;
+  color: $slate-color;
+  border: 0.0625rem solid $cloud-color;
+  background-color: $white-color;
+  &:hover {
+    cursor: pointer;
+    border: 0.0625rem solid $indigo-color;
+    color: $indigo-color;
+  }
+}
+
+@mixin button-delete {
+  @include button;
+  color: $white-color;
+  background-color: $red-color;
+  &:hover {
+    cursor: pointer;
+    background-color: $graphite-color;
+  }
+}
