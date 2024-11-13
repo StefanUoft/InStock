@@ -66,7 +66,7 @@ function WarehouseDetails() {
   ];
 
   return (
-    <div className="warehouse-details">
+    <div className="details">
       <section className="details__header">
         <img
           src={arrowBackIcon}
