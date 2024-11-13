@@ -1,0 +1,30 @@
+@use "../../styles/partials/_mixins.scss" as *;
+
+.warehouse-list {
+
+    &__table-view {
+        display: none;
+    }
+
+
+    @include desktop {
+        &__card-view {
+            display: none
+        }
+
+        &__table-view {
+            display: block
+        }
+    }
+
+    @include tablet {
+        &__card-view {
+            display: none
+        }
+
+        &__table-view {
+            display: block
+        }
+    }
+
+}
