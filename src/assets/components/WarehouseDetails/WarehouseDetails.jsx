@@ -96,7 +96,7 @@ function WarehouseDetails() {
         {items.map((item) => (
           <li key={item.id} className="details__list-item">
                 {" "}
-                <h4>INVENTORY ITEM</h4>
+                <h4 className="details__list-item">INVENTORY ITEM</h4>
                 {item.name}
                 <img
                   src={chevronRight}
