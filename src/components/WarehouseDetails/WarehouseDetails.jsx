@@ -1,8 +1,8 @@
 import "./WarehouseDetails.scss";
-import arrowBackIcon from "../../icons/arrow_back-24px.svg";
-import editIcon from "../../icons/edit-24px.svg";
-import deleteIcon from "../../icons/delete_outline-24px.svg";
-import chevronRight from "../../icons/chevron_right-24px.svg";
+import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
+import editIcon from "../../assets/icons/edit-24px.svg";
+import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
+import chevronRight from "../../assets/icons/chevron_right-24px.svg";
 
 function WarehouseDetails() {
   const warehouseData = {

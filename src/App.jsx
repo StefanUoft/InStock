@@ -1,5 +1,5 @@
 import './App.scss'
-import WarehouseDetails from './assets/components/WarehouseDetails/WarehouseDetails'
+import WarehouseDetails from './components/WarehouseDetails/WarehouseDetails'
 
 function App() {
   
