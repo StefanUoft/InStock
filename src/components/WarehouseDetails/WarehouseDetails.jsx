@@ -87,49 +87,62 @@ function WarehouseDetails() {
             {warehouseData.managerName} <span>Warehouse Manager</span>
           </p>
           <p>
-            <label className="deatail__info-contact">CONTACT INFORMATION:</label>{" "}
-            {warehouseData.contactNumber}{" "}{warehouseData.contactEmail}
+            <label className="deatail__info-contact">
+              CONTACT INFORMATION:
+            </label>{" "}
+            {warehouseData.contactNumber} {warehouseData.contactEmail}
           </p>
         </div>
       </section>
       <ul className="details__list">
         {items.map((item) => (
-          <li key={item.id} className="details__list-item">
-                {" "}
-                <h4 className="details__list-item">INVENTORY ITEM</h4>
-                {item.name}
+          <li key={item.id} className="details__item">
+            <div className="details__item-wrapper">
+              <h4 className="details__item-title">INVENTORY ITEM</h4>
+              <div className="details__item-value">
+                <p className="details__item-value-name">{item.name}</p>
                 <img
                   src={chevronRight}
                   alt="chevron-right"
-                  className="chevron-right__icon"
+                  className="details__item-value-icon"
                 />
-              <div>
-                {" "}
-                <h4>STATUS</h4>
-                <span
-                  className={`status ${
-                    item.status === "In Stock" ? "in-stock" : "out-of-stock"
-                  }`}
-                >
-                  {item.status}
-                </span>
               </div>
-                <h4>CATEGORY</h4>{item.category}
-              <div>
-                <h4>QTY:</h4> {item.qty}
-              </div>
-         
-            <div className="item-actions">
-              <button className="delete-btn">
+            </div>
+            <div className="details__item-wrapper">
+              <h4 className="details__item-title">STATUS</h4>
+              <p
+                className={`details__item-value ${
+                  item.status === "In Stock"
+                    ? "details__item-value--in-stock"
+                    : "details__item-value--out-of-stock"
+                }`}
+              >
+                {item.status}
+              </p>
+            </div>
+            <div className="details__item-wrapper">
+              <h4 className="details__item-title">CATEGORY</h4>
+              <p className="details__item-value">{item.category}</p>
+            </div>
+            <div className="details__item-wrapper">
+              <h4 className="details__item-title">QTY:</h4>
+              <p className="details__item-value">{item.qty}</p>
+            </div>
+            <div className="details__actions">
+              <button className="details__actions-button">
                 <img
                   src={deleteIcon}
                   alt="delete-Icon"
-                  className="delete__icon"
+                  className="details__actions-icon"
                 />
               </button>
-              <button className="edit-btn">
+              <button className="details__actions-button">
                 {" "}
-                <img src={editIcon} alt="edit-Icon" className="edit__icon" />
+                <img
+                  src={editIcon}
+                  alt="edit-Icon"
+                  className="details__actions-icon"
+                />
               </button>
             </div>
           </li>
