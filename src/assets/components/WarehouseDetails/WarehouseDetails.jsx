@@ -78,25 +78,23 @@ function WarehouseDetails() {
       </section>
       <section className="warehouse-details__info">
         <p>
-          <p className="deatail__info-address">WAREHOUSE ADDRESS:</p>{" "}
+          <label className="deatail__info-address">WAREHOUSE ADDRESS:</label>{" "}
           {warehouseData.address}
         </p>
         <div className="warehouse-details__info-wrapper">
           <p>
-            <p className="deatail__info-name">CONTACT NAME:</p>{" "}
+            <label className="deatail__info-name">CONTACT NAME:</label>{" "}
             {warehouseData.managerName} <span>Warehouse Manager</span>
           </p>
           <p>
-            <p className="deatail__info-contact">CONTACT INFORMATION:</p>{" "}
+            <label className="deatail__info-contact">CONTACT INFORMATION:</label>{" "}
             {warehouseData.contactNumber}{" "}{warehouseData.contactEmail}
           </p>
         </div>
       </section>
-      <ul className="warehouse-details__list">
+      <ul className="details__list">
         {items.map((item) => (
-          <li key={item.id} className="inventory-item">
-            <div className="item-details">
-              <div>
+          <li key={item.id} className="details__list-item">
                 {" "}
                 <h4>INVENTORY ITEM</h4>
                 {item.name}
@@ -105,10 +103,9 @@ function WarehouseDetails() {
                   alt="chevron-right"
                   className="chevron-right__icon"
                 />
-              </div>
               <div>
                 {" "}
-                <h4>INVENTORY ITEM</h4>
+                <h4>STATUS</h4>
                 <span
                   className={`status ${
                     item.status === "In Stock" ? "in-stock" : "out-of-stock"
@@ -117,13 +114,11 @@ function WarehouseDetails() {
                   {item.status}
                 </span>
               </div>
+                <h4>CATEGORY</h4>{item.category}
               <div>
-                <h4>CATEGORY</h4> {item.category}
+                <h4>QTY:</h4> {item.qty}
               </div>
-              <div>
-                <span>QTY:</span> {item.qty}
-              </div>
-            </div>
+         
             <div className="item-actions">
               <button className="delete-btn">
                 <img

@@ -1,5 +1,6 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
 
 .warehouse-details {
   display: flex;
@@ -41,9 +42,17 @@
       flex-direction: row;
     }
   }
-  &__list{
+
+  .details__list{
     display: flex;
     flex-direction: column;
+    width: 100%;
+    list-style: none;
+    &-item{
+      width: 50%;
+      flex-direction: column;
+ 
   }
-  
+
+}
 }
