@@ -23,7 +23,7 @@ const AddNewInventoryItem = () => {
       </div>
 
       <form className="add-item__forms" action="">
-        <div className="add-item__form">
+        <div className="add-item__details-form">
           <div className="add-item__item-details">
             <h2 className="add-item__item-details-title">Item Details</h2>
             <div className="add-item__form-container">
@@ -65,7 +65,7 @@ const AddNewInventoryItem = () => {
             </select>
           </div>
         </div>
-        <div className="add-item__availability">
+        <div className="add-item__avail-form">
           <h2 className="add-item__availability-title">Item Availability</h2>
           <div className="add-item__form-container">
             <label className="add-item__label">Status</label>

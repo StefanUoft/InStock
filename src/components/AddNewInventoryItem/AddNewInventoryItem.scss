@@ -14,11 +14,15 @@
     display: flex;
     padding: 1.5rem 1rem;
     border-bottom: 1px solid $cloud-color;
+    @include tablet{
+      padding: 2rem;
+    }
   }
 
   &__header-back-button {
     border: none;
     background-color: transparent;
+    padding-right: 0.5rem;
   }
 
   &__header-title {
@@ -27,6 +31,30 @@
 
   &__forms {
     padding: 1rem;
+    @include tablet{
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem 2rem;
+    
+    }
+  }
+
+  &__details-form{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet{
+      border-bottom: none;
+      border-right: 1px solid $cloud-color;
+      padding-right: 2.5rem;
+      width: 50%;
+    }
+  }
+
+  &__avail-form{
+    @include tablet{
+      width: 50%;
+      padding-left: 2rem;
+    }
   }
 
   &__item-details-title,
@@ -38,6 +66,7 @@
   &__form-container {
     display: flex;
     flex-direction: column;
+
   }
 
   &__label {
@@ -53,6 +82,10 @@
     border: 1px solid $cloud-color;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
+
+    @include tablet{
+      margin-bottom: 1.5rem;
+    }
   }
 
   &__input-description {
@@ -71,11 +104,32 @@
     padding-right: 2rem;
   }
 
+  &__status{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    @include tablet{
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__status-radio{
+    display: flex;
+    gap: 0.5rem;
+  }
+
+
+
   &__form-buttons{
     display: flex;
     gap: 1rem;
     justify-content: center;
+    @include tablet{
+      justify-content: flex-end;
+      padding-right: 2rem;
+    }
   }
 
+  
 
 }
