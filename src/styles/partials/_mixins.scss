@@ -1,4 +1,8 @@
 // responsive design
+@use "./fonts" as*;
+@use "./variables" as *;
+
+
 
 @mixin tablet {
   @media (min-width: 768px) {
