@@ -7,14 +7,14 @@
   display: flex;
   flex-direction: column;
   border-bottom: 0.0625rem solid $cloud-color;
- 
+
   &__details {
     border-bottom: 0.0625rem solid $cloud-color;
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
-    padding:2rem 2rem 1.5rem 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
 
     &-arrow {
       margin-right: 0.5rem;
@@ -24,45 +24,67 @@
       @include h1;
       color: $black-color;
     }
-    &-icon{
-    
-        &-span{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: $indigo-color;
-            width: 2.25rem;
-            height: 2.25rem;
-            border-radius: 50%;
-            margin-left: auto;
-        }
 
+    &-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $indigo-color;
+      background-size: contain;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      margin-left: auto;
+
+      @include tablet {
+        width: 5rem;
+        border-radius: 1.5rem;
+        justify-content: space-between;
+        padding: 0 0.75rem;
+      }
+
+      &-text {
+        display: none;
+
+        @include tablet {
+          display: flex;
+          color: white;
+        }
+      }
     }
   }
 
-  &__info{
-    @include h4;
-    display:flex;
+  &__info {
+    @include p3;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 1rem;
-    gap:1rem;
-   
-  &-wrapper {
-    display: flex;
-    flex-direction: column;
-    width:  45%;
+    padding: 1rem;
+    gap: 1rem;
 
-    &--address{
-    width: 100%;
+    @include tablet {
+      flex-wrap: nowrap;
+      padding: 1 2 1 2;
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+
+      @include tablet {
+        width: 100%;
+        &--name{
+          border-left: 0.0625rem solid $cloud-color;
+          padding-left: 2rem;
+        }
+      }
+
+      &--address {
+        width: 100%;
+       
+      }
+    
     }
   }
-
-  &-contact {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 0.0625rem solid $cloud-color;
-  }
-}
 }

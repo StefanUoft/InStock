@@ -1,6 +1,7 @@
 import "./WarehouseDetails.scss";
 import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
 import editIcon from "/src/assets/icons/edit-white-24px.svg";
+import { Link } from "react-router-dom";
 
 function WarehouseDetails() {
   const warehouseData = {
@@ -20,18 +21,21 @@ function WarehouseDetails() {
           className="warehouse__details-arrow"
         />
         <p className="warehouse__details-name">{warehouseData.name}</p>
-        <span className="warehouse__details-icon-span"><img
-          src={editIcon}
-          alt="edit-icon"
-          className="warehouse__details-icon"
-        /></span>
+        <Link to={`/warehouses`} className="warehouse__details-icon">
+          <img
+            src={editIcon}
+            alt="edit-icon"
+            className="warehouse__details-icon-image"
+          />
+          <span className="warehouse__details-icon-text">Edit</span>
+        </Link>
       </section>
       <section className="warehouse__info">
         <div className="warehouse__info-wrapper warehouse__info-wrapper--address">
           <h4 className="warehouse__info-title">WAREHOUSE ADDRESS:</h4>
           <p className="warehouse__info-value"> {warehouseData.address}</p>
         </div>
-        <div className="warehouse__info-wrapper">
+        <div className="warehouse__info-wrapper warehouse__info-wrapper--name">
           <h4 className="warehouse__info-title">CONTACT NAME:</h4>
           <p className="warehouse__info-value"> {warehouseData.managerName}</p>
           <p className="warehouse__info-position">Warehouse Manager</p>
@@ -46,4 +50,4 @@ function WarehouseDetails() {
   );
 }
 
-export default WarehouseDetails; 
+export default WarehouseDetails;
