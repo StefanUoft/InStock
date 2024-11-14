@@ -1,17 +1,10 @@
-import "./WarehouseDetails.scss";
-import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
+import "./WarehouseInventoryList.scss";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import chevronRight from "../../assets/icons/chevron_right-24px.svg";
 
-function WarehouseDetails() {
-  const warehouseData = {
-    name: "Washington",
-    address: "33 Pearl Street SW, Washington, USA",
-    managerName: "Graeme Lyon",
-    contactNumber: "+1 (647) 504-0911",
-    contactEmail: "glyon@instock.com",
-  };
+function WarehouseInventoryList() {
+
   const items = [
     {
       id: 1,
@@ -67,33 +60,6 @@ function WarehouseDetails() {
 
   return (
     <div className="details">
-      <section className="details__header">
-        <img
-          src={arrowBackIcon}
-          alt="arrow-back"
-          className="details__header-arrow"
-        />
-        <h2 className="details__header-title">{warehouseData.name}</h2>
-        <div className="details__header-edit"></div>
-      </section>
-      <section className="warehouse-details__info">
-        <p>
-          <label className="deatail__info-address">WAREHOUSE ADDRESS:</label>{" "}
-          {warehouseData.address}
-        </p>
-        <div className="warehouse-details__info-wrapper">
-          <p>
-            <label className="deatail__info-name">CONTACT NAME:</label>{" "}
-            {warehouseData.managerName} <span>Warehouse Manager</span>
-          </p>
-          <p>
-            <label className="deatail__info-contact">
-              CONTACT INFORMATION:
-            </label>{" "}
-            {warehouseData.contactNumber} {warehouseData.contactEmail}
-          </p>
-        </div>
-      </section>
       <ul className="details__list">
         {items.map((item) => (
           <li key={item.id} className="details__item">
@@ -152,4 +118,4 @@ function WarehouseDetails() {
   );
 }
 
-export default WarehouseDetails;
+export default WarehouseInventoryList;

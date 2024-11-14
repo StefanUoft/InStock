@@ -1,12 +1,12 @@
 import './App.scss'
-import WarehouseDetails from './components/WarehouseDetails/WarehouseDetails'
+import WarehouseInventoryList from './components/WarehouseInventoryList/WarehouseInventoryList'
 
 function App() {
   
 
   return (
     <>
-      <WarehouseDetails/>
+      <WarehouseInventoryList/>
     </>
   )
 }

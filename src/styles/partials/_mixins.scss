@@ -158,10 +158,12 @@
   line-height: 1.25rem;
   border-radius: 1.25rem;
 }
+
 @mixin button-primary {
   @include button;
   color: $white-color;
   background-color: $indigo-color;
+
   &:hover {
     cursor: pointer;
     background-color: $graphite-color;
@@ -173,6 +175,7 @@
   color: $slate-color;
   border: 0.0625rem solid $cloud-color;
   background-color: $white-color;
+
   &:hover {
     cursor: pointer;
     border: 0.0625rem solid $indigo-color;
@@ -184,6 +187,7 @@
   @include button;
   color: $white-color;
   background-color: $red-color;
+  
   &:hover {
     cursor: pointer;
     background-color: $graphite-color;
