@@ -1,4 +1,6 @@
-@use "/src/styles/partials/variables";
+@use "./fonts" as*;
+@use "./variables" as *;
+@use "./mixins" as*;
 
 * {
   margin: 0;
@@ -8,6 +10,6 @@
 }
 
 body {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
 }
