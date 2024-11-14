@@ -1,7 +1,8 @@
 import React from "react";
 import "./EditInventoryItem.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
+import axios from "axios";
 
 const EditInventoryItem = () => {
 
@@ -11,6 +12,76 @@ const EditInventoryItem = () => {
   const [status, setStatus] = useState("In Stock");
   const [quantity, setQuantity] = useState("");
   const [warehouse, setWarehouse] = useState("");
+  const [warehouses, setWarehouses] = useState([]);
+
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
+        console.log("Response from /api/warehouses:", response);
+        setWarehouses(Array.isArray(response.data) ? response.data : []);
+      } catch (error) {
+        console.error("Error fetching warehouses:", error);
+        setWarehouses([]);
+      }
+    };
+  
+    fetchWarehouses();
+  }, []);
+
+  const isFormValid = () => {
+    const newErrors = {};
+    const validateField = (value, fieldName, defaultValue = "") => {
+      if (value === defaultValue || (fieldName === "quantity" && value <= 0)) {
+        newErrors[fieldName] = "This field is required";
+      }
+    };
+
+    validateField(name, "name");
+    validateField(description, "description");
+    validateField(quantity, "quantity");
+    validateField(category, "category", "default");
+    validateField(warehouse, "warehouse", "default");
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleAdd = async (event) => {
+    event.preventDefault();
+    if (!isFormValid()) return;
+
+    try {
+      const selectedWarehouse = warehouses.find(
+        (wh) => wh.warehouse_name === warehouse
+      );
+      if (!selectedWarehouse) {
+        alert("Invalid warehouse selected");
+        return;
+      }
+
+      const newItem = {
+        warehouse_id: selectedWarehouse.id,
+        item_name: name,
+        description: description,
+        category: category,
+        status: status,
+        quantity: status === "In Stock" ? quantity : 0,
+      };
+
+      const addItem = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/inventories`,
+        newItem
+      );
+
+      alert("Item added successfully");
+      navigate("/inventory");
+    } catch (error) {
+      console.error("Error adding the item:", error);
+      alert("Failed to add the item. Please try again.");
+    }
+  };
+
 
   return (
     <div className="edit-item">
@@ -116,6 +187,11 @@ const EditInventoryItem = () => {
                 value={warehouse}
                 onChange={(e) => setWarehouse(e.target.value)}
               >
+                {warehouses.map((wh) => (
+                  <option key={wh.id} value={wh.warehouse_name}>
+                    {wh.warehouse_name}
+                  </option>
+                ))}
                 <option value="default">Please select</option>
               </select>
             </div>
