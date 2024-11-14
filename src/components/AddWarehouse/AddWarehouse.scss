@@ -1,0 +1,117 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+
+
+.edit-warehouse {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid $cloud-color;
+  padding-bottom: 1rem;;
+  border-radius: 0.1875rem;
+
+
+  &__header {
+    display: flex;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet {
+      padding: 2rem;
+    }
+  }
+
+  &__header-back-button {
+    border: none;
+    background-color: transparent;
+    padding-right: 0.5rem;
+  }
+
+  &__header-title {
+    @include h3; 
+    line-height: 3;
+  
+    @include tablet {
+      @include h2; 
+      line-height: normal; 
+    }
+  }
+  
+
+  &__forms {
+    padding: 1rem;
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      padding: 1.5rem 2rem;
+    }
+  }
+
+  &__warehouse-form {
+    padding-bottom: 1rem;
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      border-bottom: none;
+      padding-right: 2.5rem;
+    }
+  }
+
+  &__contact-form {
+    @include tablet {
+      padding-left: 2rem;
+    }
+  }
+
+  &__warehouse-title,
+  &__contact-title {
+    @include h2;
+    font-size:1rem;
+    line-height: .5;
+    padding: 1rem 0;
+  }
+
+  &__form-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    @include h3;
+    padding: 0.25rem 0;
+  }
+
+
+  &__input, {
+    font-size: .5rem;
+    border-radius: 1.25rem;
+    border: 1px solid $cloud-color;
+    padding: 0.5rem 1rem;
+
+    @include tablet{
+    }
+  }
+
+  &__form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    @include tablet {
+      justify-content: flex-end;
+      padding-right: 2rem;
+    }
+  }
+
+  &__button-cancel {
+    @include button-secondary;
+    font-size: .6rem;
+    width: 8rem;
+  }
+
+  &__button-add {
+    @include button-primary;
+    font-size: .5rem;
+    width: 8rem;
+  }
+}
