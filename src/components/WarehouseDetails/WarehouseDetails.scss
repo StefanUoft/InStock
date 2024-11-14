@@ -1,0 +1,68 @@
+@use "/src/styles/partials/variables" as *;
+@use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
+
+.warehouse {
+  @include p1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.0625rem solid $cloud-color;
+ 
+  &__details {
+    border-bottom: 0.0625rem solid $cloud-color;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    padding:2rem 2rem 1.5rem 2rem;
+
+    &-arrow {
+      margin-right: 0.5rem;
+    }
+
+    &-name {
+      @include h1;
+      color: $black-color;
+    }
+    &-icon{
+    
+        &-span{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $indigo-color;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+
+    }
+  }
+
+  &__info{
+    @include h4;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 1rem;
+    gap:1rem;
+   
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    width:  45%;
+
+    &--address{
+    width: 100%;
+    }
+  }
+
+  &-contact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.0625rem solid $cloud-color;
+  }
+}
+}
