@@ -61,7 +61,7 @@ function WarehouseList() {
                 <div className="warehouse-list__card" key={wh.id} id={wh.id}>
                     <div className="warehouse-list__card__item">
                         <label className="table_header">WAREHOUSE</label>
-                        <Link to="#"><h3>{wh.warehouse_name}</h3><img src={chevronRight} /></Link>
+                        <Link to={`/warehouses/${wh.id}`}><h3>{wh.warehouse_name}</h3><img src={chevronRight} /></Link>
                     </div>
                     <div className="warehouse-list__card__item">
                         <label className="table_header">CONTACT NAME</label>
@@ -77,7 +77,10 @@ function WarehouseList() {
                         <p className="p2">{wh.contact_email}</p>
                     </div>
                     <div className="warehouse-list__card__actions">
-                        {deleteButton(wh.warehouse_name)}<img src={editIcon} alt="Edit icon" />
+                        {deleteButton(wh.warehouse_name)}
+                        <Link to={`/warehouses/edit/${wh.id}`}>
+                            <img src={editIcon} alt="Edit icon" />
+                        </Link>
                     </div>
                 </div>
 
@@ -101,7 +104,7 @@ function WarehouseList() {
                     {warehouses.map((wh) => (
                         <tr key={wh.id} id={wh.id}>
                             <td>
-                                <Link to="#">
+                                <Link to={`/warehouses/${wh.id}`}>
                                     <h3>{wh.warehouse_name}</h3>
                                     <img src={chevronRight} alt="chevron right icon" />
                                 </Link>
@@ -114,7 +117,9 @@ function WarehouseList() {
                             </td>
                             <td className="warehouse-list__table-actions">
                                 {deleteButton(wh.warehouse_name)}
-                                <img src={editIcon} alt="Edit icon" />
+                                <Link to={`/warehouses/edit/${wh.id}`}>
+                                    <img src={editIcon} alt="Edit icon" />
+                                </Link>
                             </td>
                         </tr>
                     ))}
@@ -132,7 +137,7 @@ function WarehouseList() {
                     <img className="search__icon" src={searchIcon} alt="magnifying glass" />
                     <input className="search__input" type="text" name="search" placeholder="Search" />
                 </form>
-                <button className="add-warehouse"><h3>+ Add New Warehouse</h3></button>
+                <Link to="/warehouses/add"><button className="add-warehouse"><h3>+ Add New Warehouse</h3></button></Link>
             </section>
             {cardView}
             {tableView}
