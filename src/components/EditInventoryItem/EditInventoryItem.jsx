@@ -9,6 +9,7 @@ const EditInventoryItem = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("In Stock");
+  const [quantity, setQuantity] = useState("");
   const [warehouse, setWarehouse] = useState("");
 
   return (
@@ -96,6 +97,19 @@ const EditInventoryItem = () => {
 
           {status === "In Stock" && (
             <div className="edit-item__form-container">
+              <label className="edit-item__label">Quantity</label>
+              <input
+                type="number"
+                className="edit-item__Quantity-input"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                placeholder="500"
+              />
+            </div>
+          )}
+
+          
+            <div className="edit-item__form-container">
               <label className="edit-item__label">Warehouse</label>
               <select
                 className="edit-item__input-selection"
@@ -105,7 +119,7 @@ const EditInventoryItem = () => {
                 <option value="default">Please select</option>
               </select>
             </div>
-          )}
+          
         </div>
       </form>
 
