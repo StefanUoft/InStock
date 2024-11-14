@@ -49,30 +49,12 @@ function Warehouses() {
   return (
     <div>
       <h1>Warehouse list</h1>
-      {/* {warehouses.map((warehouse) => ( // assuming the warehouse route has been created/imported
+      {warehouses.map((warehouse) => ( // assuming the warehouse route has been created/imported
         <button key={warehouse.id} onClick={() => openModal(warehouse.warehouse_name)}> 
           <img src={TrashCanIcon} alt="Delete warehouse" />
         </button> // this is the trash can icon in the warehouse list
-      ))} */}
-      {warehouses.map((warehouse) => (
-        <div
-          key={warehouse.id}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "10px",
-            paddingLeft: "20px",
-          }}
-        >
-          <span>{warehouse.warehouse_name}</span> {/* Display warehouse name */}
-          <button
-            onClick={() => openModal(warehouse.warehouse_name)}
-            style={{ marginLeft: "10px" }}
-          >
-            <img src={TrashCanIcon} alt="Delete warehouse" />
-          </button>
-        </div>
       ))}
+
       <DeleteWarehouseModal
         isOpen={isModalOpen}
         onRequestClose={closeModal}

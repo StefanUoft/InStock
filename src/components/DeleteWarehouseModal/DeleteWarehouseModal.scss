@@ -56,40 +56,14 @@
   }
 
   &__button {
-    font-family: variables.$titillium;
-    font-weight: variables.$titillium-normal;
-    width: fit-content;
-    border: none;
-    outline: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.25rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    border-radius: 1.25rem;
+    @include mixins.button;
 
     &--cancel {
-      color: variables.$slate-color;
-      border: 0.0625rem solid variables.$cloud-color;
-      background-color: variables.$white-color;
-      &:hover {
-        cursor: pointer;
-        border: 0.0625rem solid variables.$indigo-color;
-        color: variables.$indigo-color;
+      @include mixins.button-secondary;
       }
-    }
-
+    
     &--delete {
-      color: variables.$white-color;
-      background-color: variables.$red-color;
-      &:hover {
-        cursor: pointer;
-        background-color: variables.$graphite-color;
-      }
+      @include mixins.button-delete;
     }
   }
 

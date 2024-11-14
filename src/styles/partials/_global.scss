@@ -1,3 +1,5 @@
+@use "/src/styles/partials/variables";
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +8,6 @@
 }
 
 body {
-  font-family: $titillium;
-  font-weight: $titillium-normal;
+  font-family: variables.$titillium;
+  font-weight: variables.$titillium-normal;
 }
