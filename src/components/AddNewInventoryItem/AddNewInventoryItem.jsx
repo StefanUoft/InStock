@@ -1,23 +1,103 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./AddNewInventoryItem.scss";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 // import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
 
 const AddNewInventoryItem = () => {
-//   const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("default");
   const [status, setStatus] = useState("In Stock");
   const [quantity, setQuantity] = useState("");
   const [warehouse, setWarehouse] = useState("default");
+  const [warehouses, setWarehouses] = useState([]);
+  const [errors, setErrors] = useState({});
+
+  // const backClick = (event) => {
+  //   event.preventDefault();
+  //   navigate("/inventory");
+  // };
+
+  // const cancelClick = (event) => {
+  //   event.preventDefault();
+  //   navigate("/inventory");
+  // };
+
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
+        console.log("Response from /api/warehouses:", response.data); 
+        setWarehouses(Array.isArray(response.data) ? response.data : []); 
+      } catch (error) {
+        console.error("Error fetching warehouses:", error);
+        setWarehouses([]); 
+      }
+    };
+  
+    fetchWarehouses();
+  }, []);
+
+  const isFormValid = () => {
+    const newErrors = {};
+    const validateField = (value, fieldName, defaultValue = "") => {
+      if (value === defaultValue || (fieldName === "quantity" && value <= 0)) {
+        newErrors[fieldName] = "This field is required";
+      }
+    };
+
+    validateField(name, "name");
+    validateField(description, "description");
+    validateField(quantity, "quantity");
+    validateField(category, "category", "default");
+    validateField(warehouse, "warehouse", "default");
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleAdd = async (event) => {
+    event.preventDefault();
+    if (!isFormValid()) return;
+
+    try {
+      const selectedWarehouse = warehouses.find(
+        (wh) => wh.warehouse_name === warehouse
+      );
+      if (!selectedWarehouse) {
+        alert("Invalid warehouse selected");
+        return;
+      }
+
+      const newItem = {
+        warehouse_id: selectedWarehouse.id,
+        item_name: name,
+        description: description,
+        category: category,
+        status: status,
+        quantity: status === "In Stock" ? quantity : 0,
+      };
+
+      const addItem = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/inventories`,
+        newItem
+      );
+
+      alert("Item added successfully");
+      navigate("/inventory");
+    } catch (error) {
+      console.error("Error adding the item:", error);
+      alert("Failed to add the item. Please try again.");
+    }
+  };
 
   return (
     <div className="add-item">
       <div className="add-item__header">
         <button className="add-item__header-back-button">
-          <img src={backArrow} alt="back button" />
+          <img src={backArrow} alt="back button" /* onClick={backClick} */ />
         </button>
         <h1 className="add-item__header-title">Add New Inventory Item</h1>
       </div>
@@ -102,7 +182,7 @@ const AddNewInventoryItem = () => {
               <label className="add-item__label">Quantity</label>
               <input
                 type="number"
-                className="add-item__Quantity-input"
+                className="add-item__quantity-input"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 placeholder="0"
@@ -119,16 +199,21 @@ const AddNewInventoryItem = () => {
                 onChange={(e) => setWarehouse(e.target.value)}
               >
                 <option value="default">Please select</option>
+                {warehouses.map((wh) => (
+                  <option key={wh.id} value={wh.warehouse_name}>
+                    {wh.warehouse_name}
+                  </option>
+                ))}
               </select>
             </div>
           )}
         </div>
       </form>
       <div className="add-item__form-buttons">
-      <button className="add-item__button-cancel">
+        <button className="add-item__button-cancel" /* onClick={cancelClick} */>
           Cancel
         </button>
-        <button className="add-item__button-add">
+        <button className="add-item__button-add" onClick={handleAdd}>
           + Add Item
         </button>
       </div>
