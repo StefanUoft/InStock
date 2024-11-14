@@ -29,11 +29,11 @@ const AddNewInventoryItem = () => {
     const fetchWarehouses = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
-        console.log("Response from /api/warehouses:", response.data); 
-        setWarehouses(Array.isArray(response.data) ? response.data : []); 
+        console.log("Response from /api/warehouses:", response);
+        setWarehouses(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error("Error fetching warehouses:", error);
-        setWarehouses([]); 
+        setWarehouses([]);
       }
     };
   
@@ -81,7 +81,7 @@ const AddNewInventoryItem = () => {
       };
 
       const addItem = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/inventories`,
+        `${import.meta.env.Vite_API_URL}/api/inventories`,
         newItem
       );
 
