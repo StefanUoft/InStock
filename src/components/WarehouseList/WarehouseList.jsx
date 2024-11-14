@@ -20,7 +20,7 @@ function WarehouseList() {
         const fetchWarehouses = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:8080/warehouse/all"
+                    "http://localhost:8080/api/warehouses"
                 );
 
                 if (Array.isArray(response.data)) {
