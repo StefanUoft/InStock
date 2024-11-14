@@ -4,6 +4,8 @@ import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 // import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
+
 const AddNewInventoryItem = () => {
   // const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -81,7 +83,7 @@ const AddNewInventoryItem = () => {
       };
 
       const addItem = await axios.post(
-        `${import.meta.env.Vite_API_URL}/api/inventories`,
+        `${import.meta.env.VITE_API_URL}/api/inventories`,
         newItem
       );
 
