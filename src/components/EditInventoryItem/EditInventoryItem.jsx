@@ -13,6 +13,8 @@ const EditInventoryItem = () => {
   const [quantity, setQuantity] = useState("");
   const [warehouse, setWarehouse] = useState("");
   const [warehouses, setWarehouses] = useState([]);
+  const [errors, setErrors] = useState({});
+
 
   useEffect(() => {
     const fetchWarehouses = async () => {
@@ -47,7 +49,7 @@ const EditInventoryItem = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleAdd = async (event) => {
+  const handleSave = async (event) => {
     event.preventDefault();
     if (!isFormValid()) return;
 
@@ -60,25 +62,25 @@ const EditInventoryItem = () => {
         return;
       }
 
-      const newItem = {
+      const updatedItem = {
         warehouse_id: selectedWarehouse.id,
         item_name: name,
-        description: description,
-        category: category,
-        status: status,
+        description,
+        category,
+        status,
         quantity: status === "In Stock" ? quantity : 0,
       };
 
-      const addItem = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/inventories`,
-        newItem
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/inventories/<ITEM_ID>`, 
+        updatedItem
       );
 
-      alert("Item added successfully");
-      navigate("/inventory");
+      alert("Item updated successfully");
+      // navigate("/inventory");
     } catch (error) {
-      console.error("Error adding the item:", error);
-      alert("Failed to add the item. Please try again.");
+      console.error("Error updating the item:", error);
+      alert("Failed to update the item. Please try again.");
     }
   };
 
@@ -187,12 +189,13 @@ const EditInventoryItem = () => {
                 value={warehouse}
                 onChange={(e) => setWarehouse(e.target.value)}
               >
+                <option value="default">Please select</option>
                 {warehouses.map((wh) => (
                   <option key={wh.id} value={wh.warehouse_name}>
                     {wh.warehouse_name}
                   </option>
                 ))}
-                <option value="default">Please select</option>
+                
               </select>
             </div>
           
@@ -201,7 +204,7 @@ const EditInventoryItem = () => {
 
       <div className="edit-item__form-buttons">
         <button className="edit-item__button-cancel">Cancel</button>
-        <button className="edit-item__button-add">+ Add Item</button>
+        <button className="edit-item__button-add" onClick={handleSave}>Save</button>
       </div>
     </div>
   );
