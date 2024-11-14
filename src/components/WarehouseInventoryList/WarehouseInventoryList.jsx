@@ -2,10 +2,13 @@ import "./WarehouseInventoryList.scss";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import chevronRight from "../../assets/icons/chevron_right-24px.svg";
+// import axios from "axios";
+// import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function WarehouseInventoryList() {
 
-  const items = [
+  const inventoryData = [
     {
       id: 1,
       name: "Television",
@@ -58,21 +61,43 @@ function WarehouseInventoryList() {
     },
   ];
 
+  // async function getInventoryItems() => {
+  //   try {
+  //     const response = await axios.get("");
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log("Error fetching inventory data: " + error);
+  //   }
+  // };
+
+  // const [inventoryData, setInventoryData] = useState(updatedIndentoryData);
+
+  // useEffect(() => {
+  //   setInventoryData(updatedInventoryData);
+  // }, [updatedInventoryData]);
+
+  // console.log(inventoryData);
+
   return (
     <div className="details">
       <ul className="details__list">
-        {items.map((item) => (
+        {inventoryData.map((item) => (
           <li key={item.id} className="details__item">
             <div className="details__item-wrapper">
               <h4 className="details__item-title">INVENTORY ITEM</h4>
-              <div className="details__item-value">
-                <p className="details__item-value-name">{item.name}</p>
+              <Link
+                to={`/inventoryItem/${item.id}`}
+                className="details__item-value"
+              >
+                <p className="details__item-value-name" onClick={""}>
+                  {item.name}
+                </p>
                 <img
                   src={chevronRight}
                   alt="chevron-right"
                   className="details__item-value-icon"
                 />
-              </div>
+              </Link>
             </div>
             <div className="details__item-wrapper">
               <h4 className="details__item-title">STATUS</h4>
