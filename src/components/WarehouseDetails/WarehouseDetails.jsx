@@ -15,11 +15,13 @@ function WarehouseDetails() {
   return (
     <div className="warehouse">
       <section className="warehouse__details">
+        <Link to={"/"}>
         <img
           src={arrowBackIcon}
           alt="arrow-back"
           className="warehouse__details-arrow"
         />
+        </Link>
         <p className="warehouse__details-name">{warehouseData.name}</p>
         <Link to={`/warehouses`} className="warehouse__details-icon">
           <img
@@ -40,7 +42,7 @@ function WarehouseDetails() {
           <p className="warehouse__info-value"> {warehouseData.managerName}</p>
           <p className="warehouse__info-position">Warehouse Manager</p>
         </div>
-        <div className="warehouse__info-wrapper">
+        <div className="warehouse__info-wrapper warehouse__info-wrapper--contact">
           <h4 className="warehouse_info-title">CONTACT INFORMATION:</h4>
           <p className="warehouse__info-value">{warehouseData.contactNumber}</p>
           <p className="warehouse__info-value">{warehouseData.contactEmail}</p>

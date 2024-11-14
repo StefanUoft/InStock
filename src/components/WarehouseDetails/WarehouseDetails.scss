@@ -74,17 +74,27 @@
 
       @include tablet {
         width: 100%;
-        &--name{
+      }
+      &--name {
+        padding-top: 1rem;
+        @include tablet {
+          width: 100%;
           border-left: 0.0625rem solid $cloud-color;
           padding-left: 2rem;
+          padding-top: 0;
+          margin-left: 7rem;
         }
       }
 
       &--address {
         width: 100%;
-       
       }
-    
+      &--contact {
+        padding-top: 1rem;
+        @include tablet {
+          padding-top: 0;
+        }
+      }
     }
   }
 }
