@@ -51,8 +51,7 @@ function WarehouseList() {
     };
 
     const deleteButton = (name) => {
-        return <img src={deleteIcon} onClick={() => openModal(name)}
-            style={{ marginLeft: "10px" }} alt="Delete icon" />
+        return <img src={deleteIcon} onClick={() => openModal(name)} alt="Delete icon" />
     }
 
     const cardView =
@@ -61,7 +60,7 @@ function WarehouseList() {
                 <div className="warehouse-list__card" key={wh.id} id={wh.id}>
                     <div className="warehouse-list__card__item">
                         <label className="table_header">WAREHOUSE</label>
-                        <Link to={`/warehouses/${wh.id}`}><h3>{wh.warehouse_name}</h3><img src={chevronRight} /></Link>
+                        <Link className="warehouse-list__card__item__link" to={`/warehouses/${wh.id}`}><h3>{wh.warehouse_name}</h3><img src={chevronRight} /></Link>
                     </div>
                     <div className="warehouse-list__card__item">
                         <label className="table_header">CONTACT NAME</label>
@@ -132,12 +131,12 @@ function WarehouseList() {
     return (
         <div className="warehouse-list">
             <section className="warehouse-list__banner">
-                <h2>Warehouses</h2>
+                <h1>Warehouses</h1>
                 <form className="search">
+                    <input className="search__input" type="text" name="search" placeholder="Search..." />
                     <img className="search__icon" src={searchIcon} alt="magnifying glass" />
-                    <input className="search__input" type="text" name="search" placeholder="Search" />
                 </form>
-                <Link to="/warehouses/add"><button className="add-warehouse"><h3>+ Add New Warehouse</h3></button></Link>
+                <Link className="add-warehouse" to="/warehouses/add"><button className="add-warehouse"><h3>+ Add New Warehouse</h3></button></Link>
             </section>
             {cardView}
             {tableView}
