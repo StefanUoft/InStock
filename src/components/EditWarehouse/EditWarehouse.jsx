@@ -266,8 +266,12 @@ function EditWarehouse() {
             />
             {errors.contact_email && <p>{errors.contact_email}</p>}
 
-            {/*Buttons Section*/}
-            <div className="edit-warehouse__form-buttons">
+          </div>
+          
+        </div>
+      </form>
+       {/*Buttons Section*/}
+       <div className="edit-warehouse__form-buttons">
               <button
                 type="button"
                 className="edit-warehouse__button-cancel"
@@ -279,9 +283,6 @@ function EditWarehouse() {
                 Save
               </button>
             </div>
-          </div>
-        </div>
-      </form>
     </div>
   );
 }

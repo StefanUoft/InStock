@@ -15,7 +15,6 @@ body {
   flex-direction: column;
   width: 100%;
   border: 1px solid $cloud-color;
-  padding-bottom: 1rem;
   border-radius: 0.1875rem;
 
   &__header {
@@ -32,7 +31,7 @@ body {
     padding-right: 0.5rem;
   }
   &__header-title {
-    @include h3;
+    @include h1;
     line-height: 3;
 
     @include tablet {
@@ -54,15 +53,12 @@ body {
   }
   &__warehouse-form {
     flex: 1;
-    padding-bottom: 1rem;
     @include tablet {
       display: flex;
       flex-direction: row;
       border-bottom: none;
-      padding-right: 1rem;
-      @include tablet {
-        border-right: 1px solid $cloud-color;
-      }
+      padding-right: 2.5rem;
+      border-right: 1px solid $cloud-color;
     }
   }
   &__contact-form {
@@ -96,13 +92,15 @@ body {
     }
   }
   &__form-buttons {
+    background-color: $light-grey-color;
     display: flex;
     gap: 1rem;
-    padding-top: 1rem;
+    padding: 1rem .5rem;
     justify-content: center;
     @include tablet {
       justify-content: flex-end;
       padding-left: 5rem;
+      padding-right: .5rem;
     }
   }
   &__button-cancel {
@@ -133,10 +131,10 @@ body {
     width: 8rem;
     font-size: 0.5rem;
     @include tablet {
-      width: 12rem;
+      width: auto;
     }
     @include desktop {
-      width: 8rem;
+   
     }
   }
 }
