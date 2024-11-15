@@ -1,16 +1,24 @@
-import '../src/app.scss'
-import AddNewInventoryItem from './components/AddNewInventoryItem/AddNewInventoryItem'
-import EditInventoryItem from './components/EditInventoryItem/EditInventoryItem'
-
+import './App.scss'
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
+import Header from "./components/Header/Header"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   
 
   return (
     <>
-      <EditInventoryItem/>
+      <BrowserRouter>
+      <Header/>
+      <Routes>
+        <Route path="/warehouses/:id" element={<WarehouseDetails/>}/>
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
 
 export default App
+
+
+    
