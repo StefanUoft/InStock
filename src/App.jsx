@@ -1,5 +1,5 @@
 import './App.scss'
-import WarehouseInventoryList from './components/WarehouseInventoryList/WarehouseInventoryList'
+import InventoryList from './components/WarehouseInventoryList/WarehouseInventoryList'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
 import Header from './components/Header/Header'
 
@@ -11,7 +11,7 @@ function App() {
   <BrowserRouter>
   <Header/>
       <Routes>
-        <Route path="/warehouses/:id" element={<WarehouseInventoryList/>}/>
+        <Route path="/warehouses/:id" element={<InventoryList/>}/>
       </Routes>
     </BrowserRouter>
     </>

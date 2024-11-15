@@ -1,11 +1,11 @@
-
 @use "./styles/partials/mixins" as *;
+@use "./styles/partials/variables" as *;
 
 a {
     text-decoration: none; 
     color: inherit;        
     font: inherit;    
-}   
+}  
 
 body {
     min-width: 20rem;
