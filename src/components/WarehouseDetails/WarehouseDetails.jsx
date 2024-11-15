@@ -1,5 +1,5 @@
 import "./WarehouseDetails.scss";
-import arrowBackIcon from "../../assets/icons/arrow_back-24px.svg";
+import arrowBackIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "/src/assets/icons/edit-white-24px.svg";
 import { Link,useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
