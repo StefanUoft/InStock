@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
-import axios from "axios"; 
+import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function AddWarehouse() {
@@ -67,13 +67,15 @@ function AddWarehouse() {
 
   const formatPhoneNumber = (phoneNumber) => {
     const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
-    return parsedPhoneNumber ? parsedPhoneNumber.formatInternational() : phoneNumber;
+    return parsedPhoneNumber
+      ? parsedPhoneNumber.formatInternational()
+      : phoneNumber;
   };
 
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to cancel?")) {
-      navigate("/warehouses"); 
+      navigate("/warehouses");
     }
   };
 
@@ -83,7 +85,6 @@ function AddWarehouse() {
     const newErrors = {};
     let isValid = true;
 
-    // Validate form data
     Object.keys(formData).forEach((key) => {
       const error = validateInput(key, formData[key]);
       if (error) {
@@ -96,12 +97,10 @@ function AddWarehouse() {
 
     if (isValid) {
       try {
-        // Send form data to the backend using axios
         const response = await axios.post(`${apiUrl}/api/warehouses`, formData);
         console.log("Warehouse added successfully:", response.data);
         alert("Warehouse added successfully. Thank you!");
 
-        // Redirect or show success message
         navigate("/warehouses");
       } catch (error) {
         console.error("Error adding warehouse:", error);
@@ -115,16 +114,20 @@ function AddWarehouse() {
       <div className="add-warehouse__header">
         <button
           className="add-warehouse__header-back-button"
-          onClick={() => navigate("/warehouses")}>
+          onClick={() => navigate("/warehouses")}
+        >
           <img src={BackArrow} alt="back button" />
         </button>
         <h1 className="add-warehouse__header-title">Add New Warehouse</h1>
       </div>
 
+      {/*Warehouse Details Section*/}
       <form className="add-warehouse__forms" onSubmit={handleAddClick}>
         <div className="add-warehouse__warehouse-form">
           <div className="add-warehouse__warehouse-details">
-            <h2 className="add-warehouse__warehouse-title">Warehouse Details</h2>
+            <h2 className="add-warehouse__warehouse-title">
+              Warehouse Details
+            </h2>
             <div className="add-warehouse__form-container">
               <label className="add-warehouse__label">Warehouse Name</label>
               <input
@@ -177,73 +180,75 @@ function AddWarehouse() {
               {errors.country && <p>{errors.country}</p>}
             </div>
           </div>
-
-          <div className="add-warehouse__contact-form">
-            <h2 className="add-warehouse__contact-title">Contact Details</h2>
-            <div className="add-warehouse__form-container">
-              <label className="add-warehouse__label">Contact Name</label>
-              <input
-                type="text"
-                className="add-warehouse__input"
-                name="contact_name"
-                placeholder="Contact Name"
-                value={formData.contact_name}
-                onChange={handleChange}
-              />
-              {errors.contact_name && <p>{errors.contact_name}</p>}
-            </div>
-
-            <div className="add-warehouse__form-container">
-              <label className="add-warehouse__label">Position</label>
-              <input
-                type="text"
-                className="add-warehouse__input"
-                name="contact_position"
-                placeholder="Position"
-                value={formData.contact_position}
-                onChange={handleChange}
-              />
-              {errors.contact_position && <p>{errors.contact_position}</p>}
-            </div>
-
-            <div className="add-warehouse__form-container">
-              <label className="add-warehouse__label">Phone Number</label>
-              <input
-                type="text"
-                className="add-warehouse__input"
-                name="contact_phone"
-                placeholder="Phone Number"
-                value={formData.contact_phone}
-                onChange={handleChange}
-              />
-              {errors.contact_phone && <p>{errors.contact_phone}</p>}
-            </div>
-
-            <div className="add-warehouse__form-container">
-              <label className="add-warehouse__label">Email</label>
-              <input
-                type="email"
-                className="add-warehouse__input"
-                name="contact_email"
-                placeholder="Email"
-                value={formData.contact_email}
-                onChange={handleChange}
-              />
-              {errors.contact_email && <p>{errors.contact_email}</p>}
-            </div>
-          </div>
         </div>
 
-        <div className="add-warehouse__form-buttons">
-          <button
-            className="add-warehouse__button-cancel"
-            onClick={handleCancelClick}
-          >
-            Cancel
-          </button>
-          <button type="submit" className="add-warehouse__button-add">
-            + Add Warehouse
-          </button>
+        {/*Contact Details Section*/}
+        <div className="add-warehouse__contact-form">
+          <h2 className="add-warehouse__contact-title">Contact Details</h2>
+          <div className="add-warehouse__form-container">
+            <label className="add-warehouse__label">Contact Name</label>
+            <input
+              type="text"
+              className="add-warehouse__input"
+              name="contact_name"
+              placeholder="Contact Name"
+              value={formData.contact_name}
+              onChange={handleChange}
+            />
+            {errors.contact_name && <p>{errors.contact_name}</p>}
+          </div>
+
+          <div className="add-warehouse__form-container">
+            <label className="add-warehouse__label">Position</label>
+            <input
+              type="text"
+              className="add-warehouse__input"
+              name="contact_position"
+              placeholder="Position"
+              value={formData.contact_position}
+              onChange={handleChange}
+            />
+            {errors.contact_position && <p>{errors.contact_position}</p>}
+          </div>
+
+          <div className="add-warehouse__form-container">
+            <label className="add-warehouse__label">Phone Number</label>
+            <input
+              type="text"
+              className="add-warehouse__input"
+              name="contact_phone"
+              placeholder="Phone Number"
+              value={formData.contact_phone}
+              onChange={handleChange}
+            />
+            {errors.contact_phone && <p>{errors.contact_phone}</p>}
+          </div>
+
+          <div className="add-warehouse__form-container">
+            <label className="add-warehouse__label">Email</label>
+            <input
+              type="email"
+              className="add-warehouse__input"
+              name="contact_email"
+              placeholder="Email"
+              value={formData.contact_email}
+              onChange={handleChange}
+            />
+            {errors.contact_email && <p>{errors.contact_email}</p>}
+
+            {/*Buttons Section*/}
+            <div className="add-warehouse__form-buttons">
+              <button
+                className="add-warehouse__button-cancel"
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="add-warehouse__button-add">
+                + Add Warehouse
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
