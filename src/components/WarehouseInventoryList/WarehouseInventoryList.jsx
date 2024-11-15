@@ -2,84 +2,56 @@ import "./WarehouseInventoryList.scss";
 import editIcon from "../../assets/icons/edit-24px.svg";
 import deleteIcon from "../../assets/icons/delete_outline-24px.svg";
 import chevronRight from "../../assets/icons/chevron_right-24px.svg";
-// import axios from "axios";
-// import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import sortIcon from "../../assets/icons/sort-24px.svg";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 
-function WarehouseInventoryList() {
+function InventoryList() {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const [inventoryData, setInventoryData] = useState([""]);
+  const { id } = useParams();
 
-  const inventoryData = [
-    {
-      id: 1,
-      name: "Television",
-      status: "In Stock",
-      category: "Electronics",
-      qty: 500,
-    },
-    {
-      id: 2,
-      name: "Gym Bag",
-      status: "Out of Stock",
-      category: "Gear",
-      qty: 0,
-    },
-    {
-      id: 3,
-      name: "Hoodie",
-      status: "Out of Stock",
-      category: "Apparel",
-      qty: 0,
-    },
-    {
-      id: 4,
-      name: "Keychain",
-      status: "In Stock",
-      category: "Accessories",
-      qty: 2000,
-    },
-    {
-      id: 5,
-      name: "Shampoo",
-      status: "In Stock",
-      category: "Health",
-      qty: 4350,
-    },
-    {
-      id: 6,
-      name: "Phone Charger",
-      status: "In Stock",
-      category: "Electronics",
-      qty: 10000,
-    },
-    { id: 7, name: "Tent", status: "In Stock", category: "Gear", qty: 800 },
-    {
-      id: 8,
-      name: "Winter Jacket",
-      status: "Out of Stock",
-      category: "Apparel",
-      qty: 0,
-    },
-  ];
-
-  // async function getInventoryItems() => {
-  //   try {
-  //     const response = await axios.get("");
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log("Error fetching inventory data: " + error);
-  //   }
-  // };
-
-  // const [inventoryData, setInventoryData] = useState(updatedIndentoryData);
-
-  // useEffect(() => {
-  //   setInventoryData(updatedInventoryData);
-  // }, [updatedInventoryData]);
-
-  // console.log(inventoryData);
+  useEffect(() => {
+    async function getInventoryList() {
+      try {
+        const response = await axios.get(
+          `${apiUrl}/api/warehouses/${id}/inventories`
+        );
+        setInventoryData(response.data);
+      } catch (error) {
+        console.error("Failed to fetch inventory data:", error);
+      }
+    }
+    getInventoryList();
+  }, [apiUrl, id]);
 
   return (
     <div className="details">
+      <div className="details__titles">
+        <h4 className="details__title">
+          INVENTORY ITEM{" "}
+          <img src={sortIcon} alt="sort-icon" className="details__title-icon" />
+        </h4>
+
+        <h4 className="details__title">
+          CATEGORY{" "}
+          <img src={sortIcon} alt="sort-icon" className="details__title-icon" />
+        </h4>
+        <h4 className="details__title">
+          STATUS{" "}
+          <img src={sortIcon} alt="sort-icon" className="details__title-icon" />
+        </h4>
+        <h4 className="details__title">
+          QUANTITY{" "}
+          <img
+            src={sortIcon}
+            alt="csort-icon"
+            className="details__title-icon"
+          />
+        </h4>
+        <h4 className="details__title">ACTIONS</h4>
+      </div>
       <ul className="details__list">
         {inventoryData.map((item) => (
           <li key={item.id} className="details__item">
@@ -90,7 +62,7 @@ function WarehouseInventoryList() {
                 className="details__item-value"
               >
                 <p className="details__item-value-name" onClick={""}>
-                  {item.name}
+                  {item.item_name}
                 </p>
                 <img
                   src={chevronRight}
@@ -100,7 +72,9 @@ function WarehouseInventoryList() {
               </Link>
             </div>
             <div className="details__item-wrapper">
-              <h4 className="details__item-title">STATUS</h4>
+              <h4 className="details__item-title details__item-title--status">
+                STATUS
+              </h4>
               <p
                 className={`details__item-value ${
                   item.status === "In Stock"
@@ -113,11 +87,15 @@ function WarehouseInventoryList() {
             </div>
             <div className="details__item-wrapper">
               <h4 className="details__item-title">CATEGORY</h4>
-              <p className="details__item-value">{item.category}</p>
+              <p className="details__item-value details__item-value--category">
+                {item.category}
+              </p>
             </div>
             <div className="details__item-wrapper">
               <h4 className="details__item-title">QTY:</h4>
-              <p className="details__item-value">{item.qty}</p>
+              <p className="details__item-value details__item-value--quantity">
+                {item.quantity}
+              </p>
             </div>
             <div className="details__actions">
               <button className="details__actions-button">
@@ -143,4 +121,4 @@ function WarehouseInventoryList() {
   );
 }
 
-export default WarehouseInventoryList;
+export default InventoryList;
