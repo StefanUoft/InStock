@@ -44,7 +44,7 @@ body {
   &__forms {
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     padding: 1rem;
     @include tablet {
       display: flex;
