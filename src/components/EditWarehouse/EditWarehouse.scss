@@ -59,7 +59,7 @@ body {
       display: flex;
       flex-direction: row;
       border-bottom: none;
-      padding-right: 2.5rem;
+      padding-right: 1rem;
       @include tablet {
         border-right: 1px solid $cloud-color;
       }
