@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, /*useNavigate*/ } from "react-router-dom";
 import "./EditInventoryItem.scss";
-import { useState, useEffect } from "react";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 import axios from "axios";
 
 const EditInventoryItem = () => {
+  const { id } = useParams();
+  // const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,35 +17,42 @@ const EditInventoryItem = () => {
   const [warehouses, setWarehouses] = useState([]);
   const [errors, setErrors] = useState({});
 
-
   useEffect(() => {
+    const fetchItemDetails = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/inventories/${id}`);
+        const item = response.data;
+        setName(item.item_name);
+        setDescription(item.description);
+        setCategory(item.category);
+        setStatus(item.status);
+        setQuantity(item.quantity);
+        setWarehouse(item.warehouse_name);
+      } catch (error) {
+        console.error("Error fetching item details:", error);
+      }
+    };
+
     const fetchWarehouses = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
-        console.log("Response from /api/warehouses:", response);
         setWarehouses(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error("Error fetching warehouses:", error);
-        setWarehouses([]);
       }
     };
-  
+
+    fetchItemDetails();
     fetchWarehouses();
-  }, []);
+  }, [id]);
 
   const isFormValid = () => {
     const newErrors = {};
-    const validateField = (value, fieldName, defaultValue = "") => {
-      if (value === defaultValue || (fieldName === "quantity" && value <= 0)) {
-        newErrors[fieldName] = "This field is required";
-      }
-    };
-
-    validateField(name, "name");
-    validateField(description, "description");
-    validateField(quantity, "quantity");
-    validateField(category, "category", "default");
-    validateField(warehouse, "warehouse", "default");
+    if (!name) newErrors.name = "Item name is required";
+    if (!description) newErrors.description = "Description is required";
+    if (!category || category === "default") newErrors.category = "Category is required";
+    if (!warehouse || warehouse === "default") newErrors.warehouse = "Warehouse is required";
+    if (status === "In Stock" && (quantity <= 0 || !quantity)) newErrors.quantity = "Quantity is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -54,9 +63,7 @@ const EditInventoryItem = () => {
     if (!isFormValid()) return;
 
     try {
-      const selectedWarehouse = warehouses.find(
-        (wh) => wh.warehouse_name === warehouse
-      );
+      const selectedWarehouse = warehouses.find((wh) => wh.warehouse_name === warehouse);
       if (!selectedWarehouse) {
         alert("Invalid warehouse selected");
         return;
@@ -71,54 +78,49 @@ const EditInventoryItem = () => {
         quantity: status === "In Stock" ? quantity : 0,
       };
 
-      await axios.put(
-        `${import.meta.env.VITE_API_URL}/api/inventories/<ITEM_ID>`, 
-        updatedItem
-      );
-
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/inventories/${id}`, updatedItem);
       alert("Item updated successfully");
-      // navigate("/inventory");
+      navigate("/inventory");
     } catch (error) {
       console.error("Error updating the item:", error);
       alert("Failed to update the item. Please try again.");
     }
   };
 
+  // const handleCancel = () => {
+  //   navigate("/inventory");
+  // };
 
   return (
     <div className="edit-item">
       <div className="edit-item__header">
-        <button className="edit-item__header-back-button">
+        <button className="edit-item__header-back-button" /* onClick={handleCancel} */>
           <img src={backArrow} alt="back button" />
         </button>
         <h1 className="edit-item__header-title">Edit Inventory Item</h1>
       </div>
 
-      <form className="edit-item__forms" action="">
+      <form className="edit-item__forms">
         <div className="edit-item__details-form">
-          <div className="edit-item__item-details">
-            <h2 className="edit-item__item-details-title">Item Details</h2>
-            <div className="edit-item__form-container">
-              <label className="edit-item__label">Item Name</label>
-              <input
-                type="text"
-                className="edit-item__input"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Television"
-              />
-            </div>
+          <div className="edit-item__form-container">
+            <label className="edit-item__label">Item Name</label>
+            <input
+              type="text"
+              className="edit-item__input"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {errors.name && <div className="error-message">{errors.name}</div>}
           </div>
 
           <div className="edit-item__form-container">
             <label className="edit-item__label">Description</label>
             <textarea
               className="edit-item__input-description"
-              rows={6}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder='This 50", 4k LED TV provides a crystal-clear picture and vivid colors'
             />
+            {errors.description && <div className="error-message">{errors.description}</div>}
           </div>
 
           <div className="edit-item__form-container">
@@ -128,12 +130,14 @@ const EditInventoryItem = () => {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
+              <option value="default">Select a category</option>
               <option value="Electronics">Electronics</option>
               <option value="Gear">Gear</option>
               <option value="Apparel">Apparel</option>
               <option value="Accessories">Accessories</option>
               <option value="Health">Health</option>
             </select>
+            {errors.category && <div className="error-message">{errors.category}</div>}
           </div>
         </div>
 
@@ -149,11 +153,9 @@ const EditInventoryItem = () => {
                   value="In Stock"
                   checked={status === "In Stock"}
                   onChange={() => setStatus("In Stock")}
-                  className="edit-item__radio"
                 />
                 In Stock
               </label>
-
               <label className="edit-item__status-radio">
                 <input
                   type="radio"
@@ -161,50 +163,50 @@ const EditInventoryItem = () => {
                   value="Out of Stock"
                   checked={status === "Out of Stock"}
                   onChange={() => setStatus("Out of Stock")}
-                  className="edit-item__radio"
                 />
                 Out of Stock
               </label>
             </div>
+            {status === "In Stock" && (
+              <div className="edit-item__form-container">
+                <label className="edit-item__label">Quantity</label>
+                <input
+                  type="number"
+                  className="edit-item__quantity-input"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                />
+                {errors.quantity && <div className="error-message">{errors.quantity}</div>}
+              </div>
+            )}
           </div>
 
-          {status === "In Stock" && (
-            <div className="edit-item__form-container">
-              <label className="edit-item__label">Quantity</label>
-              <input
-                type="number"
-                className="edit-item__Quantity-input"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                placeholder="500"
-              />
-            </div>
-          )}
-
-          
-            <div className="edit-item__form-container">
-              <label className="edit-item__label">Warehouse</label>
-              <select
-                className="edit-item__input-selection"
-                value={warehouse}
-                onChange={(e) => setWarehouse(e.target.value)}
-              >
-                <option value="default">Please select</option>
-                {warehouses.map((wh) => (
-                  <option key={wh.id} value={wh.warehouse_name}>
-                    {wh.warehouse_name}
-                  </option>
-                ))}
-                
-              </select>
-            </div>
-          
+          <div className="edit-item__form-container">
+            <label className="edit-item__label">Warehouse</label>
+            <select
+              className="edit-item__input-selection"
+              value={warehouse}
+              onChange={(e) => setWarehouse(e.target.value)}
+            >
+              <option value="default">Select a warehouse</option>
+              {warehouses.map((wh) => (
+                <option key={wh.id} value={wh.warehouse_name}>
+                  {wh.warehouse_name}
+                </option>
+              ))}
+            </select>
+            {errors.warehouse && <div className="error-message">{errors.warehouse}</div>}
+          </div>
         </div>
       </form>
 
       <div className="edit-item__form-buttons">
-        <button className="edit-item__button-cancel">Cancel</button>
-        <button className="edit-item__button-add" onClick={handleSave}>Save</button>
+        <button className="edit-item__button-cancel" /* onClick={handleCancel} */>
+          Cancel
+        </button>
+        <button className="edit-item__button-save" onClick={handleSave}>
+          Save
+        </button>
       </div>
     </div>
   );
