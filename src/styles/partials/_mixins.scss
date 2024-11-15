@@ -1,6 +1,8 @@
 @use "/src/styles/partials/variables";
 
 // responsive design
+@use "../partials/variables" as *;
+
 @mixin tablet {
   @media (min-width: 768px) {
     @content;
