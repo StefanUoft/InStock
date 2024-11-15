@@ -42,7 +42,7 @@ body {
   }
 
   &__forms {
-     width: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     padding: 1rem;
@@ -59,6 +59,10 @@ body {
       display: flex;
       flex-direction: row;
       border-bottom: none;
+      padding-right: 2.5rem;
+      @include tablet {
+        border-right: 1px solid $cloud-color;
+      }
     }
   }
   &__contact-form {
