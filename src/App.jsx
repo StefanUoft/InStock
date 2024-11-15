@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import EditWarehouse from './components/EditWarehouse/EditWarehouse.jsx';
 import './App.scss';
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
