@@ -3,11 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
-import axios from "axios"; 
+import axios from "axios";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 function EditWarehouse() {
-  const { id } = useParams();  // Get the id parameter from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     warehouse_name: "",
@@ -22,12 +22,11 @@ function EditWarehouse() {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    // Fetch the existing warehouse data using the id from the URL
     const fetchWarehouseData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/warehouses/1`);
-        setFormData(response.data);  // Populate form with fetched data
-        console.log("Fetched warehouse data:", response.data); // Log fetched data
+        const response = await axios.get(`${apiUrl}/api/warehouses`);
+        setFormData(response.data);
+        console.log("Fetched warehouse data:", response.data);
       } catch (error) {
         console.error("Error fetching warehouse data:", error);
         alert("Error fetching warehouse data. Please try again.");
@@ -35,7 +34,7 @@ function EditWarehouse() {
     };
 
     fetchWarehouseData();
-  }, [id]);
+  }, []);
 
   const validateInput = (name, value) => {
     let error = "";
@@ -83,13 +82,15 @@ function EditWarehouse() {
 
   const formatPhoneNumber = (phoneNumber) => {
     const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
-    return parsedPhoneNumber ? parsedPhoneNumber.formatInternational() : phoneNumber;
+    return parsedPhoneNumber
+      ? parsedPhoneNumber.formatInternational()
+      : phoneNumber;
   };
 
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to cancel?")) {
-      navigate("/warehouses"); 
+      navigate("/warehouses");
     }
   };
 
@@ -115,18 +116,19 @@ function EditWarehouse() {
 
       setErrors(newErrors);
 
-      if (valid) {  // Use 'valid' instead of 'isValid'
-        console.log("Form data before sending:", formData); // Log form data before sending
+      if (valid) {
+        console.log("Form data before sending:", formData);
         try {
-          // Send form data to the backend using axios
-          const response = await axios.put(`${apiUrl}/api/warehouses/${id}`, formData);
-          console.log("Warehouse updated successfully:", response.data); // Log successful response
+          const response = await axios.put(
+            `${apiUrl}/api/warehouses/${id}`,
+            formData
+          );
+          console.log("Warehouse updated successfully:", response.data);
           alert("Warehouse updated successfully. Thank you!");
 
-          // Redirect to the warehouses page
           navigate("/warehouses");
         } catch (error) {
-          console.error("Error updating warehouse:", error); // Log error if request fails
+          console.error("Error updating warehouse:", error);
           alert("There was an error updating the warehouse. Please try again.");
         }
       }
@@ -138,16 +140,20 @@ function EditWarehouse() {
       <div className="edit-warehouse__header">
         <button
           className="edit-warehouse__header-back-button"
-          onClick={() => navigate("/warehouses")}>
+          onClick={() => navigate("/warehouses")}
+        >
           <img src={BackArrow} alt="back button" />
         </button>
         <h1 className="edit-warehouse__header-title">Edit Warehouse</h1>
       </div>
 
+      {/*Warehouse Details Section*/}
       <form className="edit-warehouse__forms" onSubmit={handleSaveClick}>
         <div className="edit-warehouse__warehouse-form">
           <div className="edit-warehouse__warehouse-details">
-            <h2 className="edit-warehouse__warehouse-title">Warehouse Details</h2>
+            <h2 className="edit-warehouse__warehouse-title">
+              Warehouse Details
+            </h2>
             <div className="edit-warehouse__form-container">
               <label className="edit-warehouse__label">Warehouse Name</label>
               <input
@@ -198,6 +204,7 @@ function EditWarehouse() {
             </div>
           </div>
 
+          {/*Contact Details Section*/}
           <div className="edit-warehouse__contact-form">
             <h2 className="edit-warehouse__contact-title">Contact Details</h2>
             <div className="edit-warehouse__form-container">
@@ -247,20 +254,21 @@ function EditWarehouse() {
                 onChange={handleChange}
               />
               {errors.contact_email && <p>{errors.contact_email}</p>}
+              {/*Buttons Section*/}
+              <div className="edit-warehouse__form-buttons">
+                <button
+                  type="button"
+                  className="edit-warehouse__button-cancel"
+                  onClick={handleCancelClick}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="edit-warehouse__button-save">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="edit-warehouse__footer">
-          <button
-            type="button"
-            className="edit-warehouse__button-cancel"
-            onClick={handleCancelClick}>
-            Cancel
-          </button>
-          <button type="submit" className="edit-warehouse__button-save">
-            Save
-          </button>
         </div>
       </form>
     </div>

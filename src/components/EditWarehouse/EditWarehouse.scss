@@ -3,6 +3,15 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/global" as *;
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;     
+}
+
+
+
 .edit-warehouse {
   display: flex;
   flex-direction: column;
@@ -83,20 +92,45 @@
   &__form-buttons {
     display: flex;
     gap: 1rem;
+    padding-top:1rem;
     justify-content: center;
     @include tablet {
       justify-content: flex-end;
-      padding-right: 2rem;
+      padding-left: 5rem;
     }
   }
   &__button-cancel {
     @include button-secondary;
+    height: 1.6rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: .5rem;
+    border-radius: 1.25rem;
     font-size: .6rem;
     width: 8rem;
+    @include tablet {
+      width: auto;
+    }
   }
   &__button-save {
     @include button-primary;
-    font-size: .5rem;
+    height: 1.6rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: .5rem;
+    border-radius: 1.25rem;
+    font-size: .6rem;
     width: 8rem;
+    font-size: .5rem;
+    @include tablet {
+      width: 12rem;
+    }
+      @include desktop {
+        width: 8rem;
+    }
   }
 }
