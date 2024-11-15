@@ -235,22 +235,21 @@ function AddWarehouse() {
               onChange={handleChange}
             />
             {errors.contact_email && <p>{errors.contact_email}</p>}
-
-            {/*Buttons Section*/}
-            <div className="add-warehouse__form-buttons">
-              <button
-                className="add-warehouse__button-cancel"
-                onClick={handleCancelClick}
-              >
-                Cancel
-              </button>
-              <button type="submit" className="add-warehouse__button-add">
-                + Add Warehouse
-              </button>
-            </div>
           </div>
         </div>
       </form>
+      {/*Buttons Section*/}
+      <div className="add-warehouse__form-buttons">
+        <button
+          className="add-warehouse__button-cancel"
+          onClick={handleCancelClick}
+        >
+          Cancel
+        </button>
+        <button type="submit" className="add-warehouse__button-add">
+          + Add Warehouse
+        </button>
+      </div>
     </div>
   );
 }
