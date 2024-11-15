@@ -1,17 +1,17 @@
 import './App.scss'
-import InventoryList from './components/WarehouseInventoryList/WarehouseInventoryList'
-import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import Header from './components/Header/Header'
+import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
+import Header from "./components/Header/Header"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   
 
   return (
     <>
-  <BrowserRouter>
-  <Header/>
+      <BrowserRouter>
+      <Header/>
       <Routes>
-        <Route path="/warehouses/:id" element={<InventoryList/>}/>
+        <Route path="/warehouses/:id" element={<WarehouseDetails/>}/>
       </Routes>
     </BrowserRouter>
     </>
