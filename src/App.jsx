@@ -4,15 +4,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import EditWarehouse from './components/EditWarehouse/EditWarehouse.jsx';
 import AddWarehouse from './components/AddWarehouse/AddWarehouse.jsx';
 
+
 function App() {
   return (
-    <Router>
+
+<Router>
       <Routes>
       <Route path="/" element={<AddWarehouse />} />
         {/* <Route path="/edit-warehouse" element={<EditWarehouse />} /> */}
 
       </Routes>
     </Router>
+    
   );
 }
 

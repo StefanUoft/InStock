@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
+import axios from "axios"; 
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function AddWarehouse() {
   const navigate = useNavigate();
@@ -18,7 +20,6 @@ function AddWarehouse() {
   });
 
   const [errors, setErrors] = useState({});
-
 
   const validateInput = (name, value) => {
     let error = "";
@@ -44,7 +45,6 @@ function AddWarehouse() {
     return error;
   };
 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     let formattedValue = value;
@@ -58,7 +58,6 @@ function AddWarehouse() {
       [name]: formattedValue,
     }));
 
-  
     const error = validateInput(name, formattedValue);
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -74,17 +73,17 @@ function AddWarehouse() {
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to cancel?")) {
-      navigate("/warehouses");
+      navigate("/warehouses"); 
     }
   };
 
- 
-  const handleAddClick = (e) => {
+  const handleAddClick = async (e) => {
     e.preventDefault();
 
     const newErrors = {};
     let isValid = true;
 
+    // Validate form data
     Object.keys(formData).forEach((key) => {
       const error = validateInput(key, formData[key]);
       if (error) {
@@ -96,16 +95,22 @@ function AddWarehouse() {
     setErrors(newErrors);
 
     if (isValid) {
-       // Process form data secction - send to the backend later)
-      console.log("Form is valid and ready to be submitted:", formData);
-      // Redirect or show success message here
-      navigate("/warehouses");
+      try {
+        // Send form data to the backend using axios
+        const response = await axios.post(`${apiUrl}/api/warehouses`, formData);
+        console.log("Warehouse added successfully:", response.data);
+        alert("Warehouse added successfully. Thank you!");
+
+        // Redirect or show success message
+        navigate("/warehouses");
+      } catch (error) {
+        console.error("Error adding warehouse:", error);
+        alert("There was an error adding the warehouse. Please try again.");
+      }
     }
   };
 
   return (
-
-
     <div className="add-warehouse">
       <div className="add-warehouse__header">
         <button
@@ -116,17 +121,10 @@ function AddWarehouse() {
         <h1 className="add-warehouse__header-title">Add New Warehouse</h1>
       </div>
 
-
       <form className="add-warehouse__forms" onSubmit={handleAddClick}>
         <div className="add-warehouse__warehouse-form">
-
-
-
-
-
           <div className="add-warehouse__warehouse-details">
             <h2 className="add-warehouse__warehouse-title">Warehouse Details</h2>
-
             <div className="add-warehouse__form-container">
               <label className="add-warehouse__label">Warehouse Name</label>
               <input
@@ -179,11 +177,6 @@ function AddWarehouse() {
               {errors.country && <p>{errors.country}</p>}
             </div>
           </div>
-
-
-
-
-
 
           <div className="add-warehouse__contact-form">
             <h2 className="add-warehouse__contact-title">Contact Details</h2>
@@ -240,7 +233,6 @@ function AddWarehouse() {
             </div>
           </div>
         </div>
-        </form>
 
         <div className="add-warehouse__form-buttons">
           <button
@@ -253,13 +245,9 @@ function AddWarehouse() {
             + Add Warehouse
           </button>
         </div>
+      </form>
     </div>
   );
 }
 
 export default AddWarehouse;
-
-
-
-
-
