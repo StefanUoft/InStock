@@ -9,7 +9,9 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<EditWarehouse />} />
+      <Route path="*" element={<EditWarehouse />} />
+
+
       
       </Routes>
     </Router>

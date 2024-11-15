@@ -1,12 +1,13 @@
 import "./EditWarehouse.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
-
-
+import axios from "axios"; 
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function EditWarehouse() {
+  const { id } = useParams();  // Get the id parameter from the URL
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     warehouse_name: "",
@@ -19,6 +20,22 @@ function EditWarehouse() {
     contact_email: "",
   });
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    // Fetch the existing warehouse data using the id from the URL
+    const fetchWarehouseData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/warehouses/1`);
+        setFormData(response.data);  // Populate form with fetched data
+        console.log("Fetched warehouse data:", response.data); // Log fetched data
+      } catch (error) {
+        console.error("Error fetching warehouse data:", error);
+        alert("Error fetching warehouse data. Please try again.");
+      }
+    };
+
+    fetchWarehouseData();
+  }, [id]);
 
   const validateInput = (name, value) => {
     let error = "";
@@ -47,52 +64,76 @@ function EditWarehouse() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     let formattedValue = value;
+
     if (name === "contact_phone") {
       formattedValue = formatPhoneNumber(value);
     }
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: formattedValue,
     }));
-  
+
     const error = validateInput(name, formattedValue);
     setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: error,
     }));
   };
+
   const formatPhoneNumber = (phoneNumber) => {
     const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
     return parsedPhoneNumber ? parsedPhoneNumber.formatInternational() : phoneNumber;
   };
+
   const handleCancelClick = (e) => {
     e.preventDefault();
     if (window.confirm("Are you sure you want to cancel?")) {
-      navigate("/warehouses");
+      navigate("/warehouses"); 
     }
   };
- 
-  const handleAddClick = (e) => {
-    e.preventDefault();
-    const newErrors = {};
-    let isValid = true;
-    Object.keys(formData).forEach((key) => {
-      const error = validateInput(key, formData[key]);
-      if (error) {
-        newErrors[key] = error;
-        isValid = false;
-      }
-    });
-    setErrors(newErrors);
-    if (isValid) {
-       // Process form data secction - send to the backend later)
-      console.log("Form is valid and ready to be submitted:", formData);
-      // Redirect or show success message here
-      navigate("/warehouses");
-    }
-  };
-  return (
 
+  const handleSaveClick = async (e) => {
+    e.preventDefault();
+
+    if (window.confirm("Are you ready to save?")) {
+      let valid = true;
+      const newErrors = {};
+
+      Object.keys(formData).forEach((key) => {
+        if (!formData[key]) {
+          newErrors[key] = "This field is required";
+          valid = false;
+        } else {
+          const error = validateInput(key, formData[key]);
+          if (error) {
+            newErrors[key] = error;
+            valid = false;
+          }
+        }
+      });
+
+      setErrors(newErrors);
+
+      if (valid) {  // Use 'valid' instead of 'isValid'
+        console.log("Form data before sending:", formData); // Log form data before sending
+        try {
+          // Send form data to the backend using axios
+          const response = await axios.put(`${apiUrl}/api/warehouses/${id}`, formData);
+          console.log("Warehouse updated successfully:", response.data); // Log successful response
+          alert("Warehouse updated successfully. Thank you!");
+
+          // Redirect to the warehouses page
+          navigate("/warehouses");
+        } catch (error) {
+          console.error("Error updating warehouse:", error); // Log error if request fails
+          alert("There was an error updating the warehouse. Please try again.");
+        }
+      }
+    }
+  };
+
+  return (
     <div className="edit-warehouse">
       <div className="edit-warehouse__header">
         <button
@@ -103,12 +144,8 @@ function EditWarehouse() {
         <h1 className="edit-warehouse__header-title">Edit Warehouse</h1>
       </div>
 
-      <form className="edit-warehouse__forms" onSubmit={handleAddClick}>
+      <form className="edit-warehouse__forms" onSubmit={handleSaveClick}>
         <div className="edit-warehouse__warehouse-form">
-
-
-
-
           <div className="edit-warehouse__warehouse-details">
             <h2 className="edit-warehouse__warehouse-title">Warehouse Details</h2>
             <div className="edit-warehouse__form-container">
@@ -160,10 +197,6 @@ function EditWarehouse() {
               {errors.country && <p>{errors.country}</p>}
             </div>
           </div>
-
-
-
-
 
           <div className="edit-warehouse__contact-form">
             <h2 className="edit-warehouse__contact-title">Contact Details</h2>
@@ -217,19 +250,21 @@ function EditWarehouse() {
             </div>
           </div>
         </div>
-        </form>
-        <div className="edit-warehouse__form-buttons">
+
+        <div className="edit-warehouse__footer">
           <button
+            type="button"
             className="edit-warehouse__button-cancel"
-            onClick={handleCancelClick}
-          >
+            onClick={handleCancelClick}>
             Cancel
           </button>
           <button type="submit" className="edit-warehouse__button-save">
             Save
           </button>
         </div>
+      </form>
     </div>
   );
 }
+
 export default EditWarehouse;
