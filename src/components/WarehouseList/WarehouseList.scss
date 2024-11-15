@@ -1,34 +1,131 @@
 @use "../../styles/partials/_mixins.scss" as *;
+@use "../../styles/partials/_variables.scss" as *;
+
+body {
+  background-color: $graphite-color;
+  padding: 1.25rem;
+}
 
 .warehouse-list {
+  background-color: $light-grey-color;
+  padding: 1.25rem 0rem 1.25rem 0rem;
+  border-radius: 0.25rem;
+  margin: 0.25rem 0;
 
-    &__table-view {
-        display: none;
+  .table_header {
+    @include h4;
+  }
+
+  &__banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem 1rem;
+    text-align: left;
+
+    h1 {
+      align-self: flex-start;
     }
 
+    .search {
+      height: 2.375rem;
+      width: 100%;
+      padding: 0.25rem 1rem;
+      margin: 0.667rem auto;
+      border-radius: 1.25rem;
+      display: inline-flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      background-color: $light-grey-color;
+      border: 0.0625rem solid $cloud-color;
+      
+      @include desktop {
+        max-width: 15rem;
+      }
+
+      @include tablet {
+        max-width: 15rem;
+      }
+
+      &__icon {
+        margin-right: 0.5rem;
+      }
+
+      &__input {
+        border: none;
+        outline: none;
+        background-color: $light-grey-color;
+        flex-grow: 1;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  &__table-view {
+    display: none;
 
     @include desktop {
-        &__card-view {
-            display: none
-        }
-
-        &__table-view {
-            display: block
-        }
+      display: block;
     }
 
     @include tablet {
-        &__card-view {
-            display: none
-        }
+      display: block;
+    }
+  }
 
-        &__table-view {
-            display: block
-        }
+  &__card-view {
+    display: flex;
+    flex-direction: column;
+
+    @include desktop {
+      display: none;
     }
 
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-top: 0.0625rem solid $cloud-color;
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 50%;
+      text-align: left;
+      padding: 0.875rem 0.2rem 0.875rem 1.25rem;
+
+      &--right{
+        padding-left:0.25rem;
+      }
+
+      &__link {
+        display: inline-flex;
+        align-items:center;
+        color:$indigo-color
+      }
+    }
+
+    &__actions {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      padding: 0rem 1.25rem;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+    }
+  }
 }
 
-.add-warehouse{
-    @include button-primary
+.add-warehouse {
+  @include button-primary;
+  width: 100%;
 }

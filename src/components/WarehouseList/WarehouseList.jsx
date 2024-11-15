@@ -8,6 +8,7 @@ import chevronRight from "/src/assets/Icons/chevron_right-24px.svg";
 import deleteIcon from "/src/assets/Icons/delete_outline-24px.svg"
 import editIcon from "/src/assets/Icons/edit-24px.svg"
 import DeleteWarehouseModal from "/src/components/DeleteWarehouseModal/DeleteWarehouseModal";
+import Header from '/src/components/Header/Header.jsx';
 
 
 function WarehouseList() {
@@ -20,7 +21,7 @@ function WarehouseList() {
         const fetchWarehouses = async () => {
             try {
                 const response = await axios.get(
-                    "http://localhost:8080/api/warehouses"
+                    `http://${import.meta.env.VITE_API_URL}/api/warehouses`
                 );
 
                 if (Array.isArray(response.data)) {
@@ -62,7 +63,7 @@ function WarehouseList() {
                         <label className="table_header">WAREHOUSE</label>
                         <Link className="warehouse-list__card__item__link" to={`/warehouses/${wh.id}`}><h3>{wh.warehouse_name}</h3><img src={chevronRight} /></Link>
                     </div>
-                    <div className="warehouse-list__card__item">
+                    <div className="warehouse-list__card__item warehouse-list__card__item--right">
                         <label className="table_header">CONTACT NAME</label>
                         <p className="p2">{wh.contact_name}</p>
                     </div>
@@ -70,7 +71,7 @@ function WarehouseList() {
                         <label className="table_header">ADDRESS</label>
                         <p className="p2">{wh.address}, {wh.city}, {wh.country}</p>
                     </div>
-                    <div className="warehouse-list__card__item">
+                    <div className="warehouse-list__card__item warehouse-list__card__item--right">
                         <label className="table_header">CONTACT INFORMATION</label>
                         <p className="p2">{wh.contact_phone}</p><br />
                         <p className="p2">{wh.contact_email}</p>
@@ -129,6 +130,8 @@ function WarehouseList() {
 
 
     return (
+        <>
+        <Header />
         <div className="warehouse-list">
             <section className="warehouse-list__banner">
                 <h1>Warehouses</h1>
@@ -148,6 +151,7 @@ function WarehouseList() {
                 itemName={selectedWarehouse}
             />
         </div>
+        </>
     )
 }
 
