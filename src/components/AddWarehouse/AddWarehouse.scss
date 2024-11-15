@@ -46,29 +46,35 @@ body {
   
 
   &__forms {
-    padding: 1rem;
-    @include tablet {
-      display: flex;
-      flex-direction: row;
-      padding: 1.5rem 2rem;
+    width: 100%;
+   display: flex;
+   justify-content: center;
+   padding: 1rem;
+   @include tablet {
+     display: flex;
+     flex-direction: row;
+   }
+ }
+ &__warehouse-form {
+   flex: 1;
+   padding-bottom: 1rem;
+   @include tablet {
+     display: flex;
+     flex-direction: row;
+     border-bottom: none;
+     padding-right: 2.5rem;
+     @include tablet {
+    border-right: 1px solid $cloud-color;
     }
-  }
+   }
+ }
+ &__contact-form {
+   flex: 1;
+   @include tablet {
+     padding-left: 2rem;
+   }
+ }
 
-  &__warehouse-form {
-    padding-bottom: 1rem;
-    @include tablet {
-      display: flex;
-      flex-direction: row;
-      border-bottom: none;
-      padding-right: 2.5rem;
-    }
-  }
-
-  &__contact-form {
-    @include tablet {
-      padding-left: 2rem;
-    }
-  }
 
   &__warehouse-title,
   &__contact-title {
@@ -94,7 +100,6 @@ body {
     border-radius: 1.25rem;
     border: 1px solid $cloud-color;
     padding: 0.5rem 1rem;
-
     @include tablet{
     }
   }
