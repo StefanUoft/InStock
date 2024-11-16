@@ -1,4 +1,7 @@
-@use "./variables" as variables;
+@use "./fonts" as*;
+@use "./variables" as *;
+@use "./mixins" as*;
+// @use "./variables" as variables;
 
 * {
   margin: 0;
@@ -8,6 +11,6 @@
 }
 
 body {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
 }

@@ -1,7 +1,11 @@
-@use "./variables" as variables;
-
 // responsive design
-@use "../partials/variables" as *;
+@use "./fonts" as*;
+@use "./variables" as *;
+
+// @use "./variables" as variables;
+
+// // responsive design
+// @use "../partials/variables" as *;
 
 @mixin tablet {
   @media (min-width: 768px) {
@@ -19,8 +23,8 @@
 
 // h1 - page header
 @mixin h1 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-semi-bold;
+  font-family: $titillium;
+  font-weight: $titillium-semi-bold;
   font-size: 1.75rem;
   line-height: 2.25rem;
 
@@ -37,8 +41,8 @@
 
 // h2 - subheader
 @mixin h2 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-semi-bold;
+  font-family: $titillium;
+  font-weight: $titillium-semi-bold;
   font-size: 1.25rem;
   line-height: 1.75rem;
 
@@ -55,8 +59,8 @@
 
 // h3 - labels, links & buttons
 @mixin h3 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-semi-bold;
+  font-family: $titillium;
+  font-weight: $titillium-semi-bold;
   font-size: 0.8125rem;
   line-height: 1.25rem;
 
@@ -73,12 +77,12 @@
 
 // h4 - table header
 @mixin h4 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
   text-transform: uppercase;
   font-size: 0.6875rem;
   line-height: 1rem;
-  color: variables.$slate-color;
+  color: $slate-color;
 
   @include tablet {
     font-size: 0.75rem;
@@ -93,8 +97,8 @@
 
 // p1 - body large
 @mixin p1 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
   font-size: 0.9375rem;
   line-height: 1.625rem;
 
@@ -111,8 +115,8 @@
 
 // p2 - body medium
 @mixin p2 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
   font-size: 0.8125rem;
   line-height: 1.25rem;
 
@@ -129,8 +133,8 @@
 
 // p3 - body small
 @mixin p3 {
-  font-family: variables.$titillium;
-  font-weight: variables.$titillium-normal;
+  font-family: $titillium;
+  font-weight: $titillium-normal;
   font-size: 0.6875rem;
   line-height: 1rem;
 
@@ -148,7 +152,7 @@
 // buttons
 
 @mixin button {
-  font-family: variables.$titillium;
+  font-family: $titillium;
   width: fit-content;
   border: none;
   outline: none;
@@ -166,32 +170,32 @@
 
 @mixin button-primary {
   @include button;
-  color: variables.$white-color;
-  background-color: variables.$indigo-color;
+  color: $white-color;
+  background-color: $indigo-color;
   &:hover {
     cursor: pointer;
-    background-color: variables.$graphite-color;
+    background-color: $graphite-color;
   }
 }
 
 @mixin button-secondary {
   @include button;
-  color: variables.$slate-color;
-  border: 0.0625rem solid variables.$cloud-color;
-  background-color: variables.$white-color;
+  color: $slate-color;
+  border: 0.0625rem solid $cloud-color;
+  background-color: $white-color;
   &:hover {
     cursor: pointer;
-    border: 0.0625rem solid variables.$indigo-color;
-    color: variables.$indigo-color;
+    border: 0.0625rem solid $indigo-color;
+    color: $indigo-color;
   }
 }
 
 @mixin button-delete {
   @include button;
-  color: variables.$white-color;
-  background-color: variables.$red-color;
+  color: $white-color;
+  background-color: $red-color;
   &:hover {
     cursor: pointer;
-    background-color: variables.$graphite-color;
+    background-color: $graphite-color;
   }
 }
