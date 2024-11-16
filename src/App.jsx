@@ -1,3 +1,4 @@
+import React from 'react';
 import WarehouseList from "./components/WarehouseList/WarehouseList";
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
