@@ -1,126 +1,290 @@
-// import React, { useState } from "react";
-// import "./EditWarehouse.scss";
-// import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
-// import { useNavigate } from "react-router-dom";
+import "./EditWarehouse.scss";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
+import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
+import axios from "axios";
 
-// function EditWarehouse() {
-//     const navigate = useNavigate();
-//     const [formData, setFormData] = useState({
-//         warehouse_name: "",
-//         address: "",
-//         city: "",
-//         country: "",
-//         contact_name: "",
-//         contact_position: "",
-//         contact_phone: "",
-//         contact_email: "",
-//     });
+const apiUrl = import.meta.env.VITE_API_URL;
 
-//     const [errors, setErrors] = useState({});
+function EditWarehouse() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-//     const handleChange = (e) => {
-//         const { name, value } = e.target;
-//         setFormData({
-//             ...formData,
-//             [name]: value,
-//         });
-//         validateInput(name, value);
-//     };
+  const [formData, setFormData] = useState({
+    warehouse_name: "",
+    address: "",
+    city: "",
+    country: "",
+    contact_name: "",
+    contact_position: "",
+    contact_phone: "",
+    contact_email: "",
+  });
 
-//     const validateInput = (name, value) => {
-//         let error = "";
-//         if (!value) {
-//             error = "This field is required";
-//         } else {
-//             if (name === "contact_email") {
-//                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//                 error = !emailPattern.test(value)
-//                     ? "Valid email is required"
-//                     : "";
-//             }
-//         }
-//         setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
-//     };
+  const [errors, setErrors] = useState({});
 
-//     const handleCancelClick = (e) => {
-//         e.preventDefault();
-//         if (window.confirm("Are you sure you want to cancel?")) {
-//             window.history.back();
-//         }
-//     };
+  useEffect(() => {
+    const fetchWarehouseData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/api/warehouses`);
+        setFormData((prevState) => ({
+          ...prevState,
+          ...response.data,
+        }));
+        console.log("Fetched warehouse data:", response.data);
+      } catch (error) {
+        console.error("Error fetching warehouse data:", error);
+        alert("Error fetching warehouse data. Please try again.");
+      }
+    };
 
-//     const handleBackClick = () => {
-//         window.history.back();
-//     };
+    fetchWarehouseData();
+  }, [id]);
 
-//     const handleSaveClick = (e) => {
-//         e.preventDefault();
-//         if (window.confirm("Are you ready to save?")) {
-//             console.log("Form data saved:", formData);
-//             navigate("/warehouses");
-//         }
-//     };
+  const validateInput = (name, value) => {
+    let error = "";
+    if (!value) {
+      error = "This field is required";
+    } else {
+      switch (name) {
+        case "contact_email":
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          error = !emailPattern.test(value) ? "Valid email is required" : "";
+          break;
+        case "contact_phone":
+          const parsedPhoneNumber = parsePhoneNumberFromString(value, "US");
+          error =
+            !parsedPhoneNumber || !parsedPhoneNumber.isValid()
+              ? "Valid phone number is required"
+              : "";
+          break;
+        default:
+          break;
+      }
+    }
+    return error;
+  };
 
-//     return (
-//         <section className="card">
-//             <div className="card__title">
-//                 <div className="card__title-container">
-//                     <button className="backbutton__link" onClick={handleBackClick}>
-//                         <img
-//                             className="card__icon-arrow"
-//                             src={BackArrow}
-//                             alt="Back to Warehouse List Page"
-//                         />
-//                     </button>
-//                     <h1>Edit Warehouse</h1>
-//                 </div>
-//             </div>
-//             <div className="forms">
-//                 <div className="forms__container">
-//                     {/* Form fields */}
-//                     <div className="form-group">
-//                         <label htmlFor="warehouse_name">Warehouse Name</label>
-//                         <input
-//                             type="text"
-//                             id="warehouse_name"
-//                             name="warehouse_name"
-//                             value={formData.warehouse_name}
-//                             onChange={handleChange}
-//                         />
-//                         {errors.warehouse_name && <p>{errors.warehouse_name}</p>}
-//                     </div>
-//                     <div className="form-group">
-//                         <label htmlFor="contact_email">Contact Email</label>
-//                         <input
-//                             type="email"
-//                             id="contact_email"
-//                             name="contact_email"
-//                             value={formData.contact_email}
-//                             onChange={handleChange}
-//                         />
-//                         {errors.contact_email && <p>{errors.contact_email}</p>}
-//                     </div>
-                
-//                 </div>
-//                 <div className="form__ctas">
-//                     <button
-//                         className="form__ctas-cancel"
-//                         type="button"
-//                         onClick={handleCancelClick}
-//                     >
-//                         <h3>Cancel</h3>
-//                     </button>
-//                     <button
-//                         className="form__ctas-edit"
-//                         type="button"
-//                         onClick={handleSaveClick}
-//                     >
-//                         <h3>Save</h3>
-//                     </button>
-//                 </div>
-//             </div>
-//         </section>
-//     );
-// }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    let formattedValue = value;
 
-// export default EditWarehouse;
+    if (name === "contact_phone") {
+      formattedValue = formatPhoneNumber(value);
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: formattedValue,
+    }));
+
+    const error = validateInput(name, formattedValue);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+
+  const formatPhoneNumber = (phoneNumber) => {
+    const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
+    return parsedPhoneNumber
+      ? parsedPhoneNumber.formatInternational()
+      : phoneNumber;
+  };
+
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+    if (window.confirm("Are you sure you want to cancel?")) {
+      navigate("/warehouses");
+    }
+  };
+
+  const handleSaveClick = async (e) => {
+    e.preventDefault();
+
+    if (window.confirm("Are you ready to save?")) {
+      let valid = true;
+      const newErrors = {};
+
+      Object.keys(formData).forEach((key) => {
+        if (!formData[key]) {
+          newErrors[key] = "This field is required";
+          valid = false;
+        } else {
+          const error = validateInput(key, formData[key]);
+          if (error) {
+            newErrors[key] = error;
+            valid = false;
+          }
+        }
+      });
+
+      setErrors(newErrors);
+
+      if (valid) {
+        console.log("Form data before sending:", formData);
+        try {
+          const response = await axios.put(
+            `${apiUrl}/api/warehouses/</WAREHOUSE_ID>`,
+            formData
+          );
+          console.log("Warehouse updated successfully:", response.data);
+          alert("Warehouse updated successfully. Thank you!");
+
+          navigate("/warehouses");
+        } catch (error) {
+          console.error("Error updating warehouse:", error);
+          alert("There was an error updating the warehouse. Please try again.");
+        }
+      }
+    }
+  };
+
+  if (!formData || Object.keys(formData).length === 0) {
+    return <p>Loading...</p>;
+  }
+
+  return (
+    <div className="edit-warehouse">
+      <div className="edit-warehouse__header">
+        <button
+          className="edit-warehouse__header-back-button"
+          onClick={() => navigate("/warehouses")}
+        >
+          <img src={BackArrow} alt="back button" />
+        </button>
+        <h1 className="edit-warehouse__header-title">Edit Warehouse</h1>
+      </div>
+
+      {/*Warehouse Details Section*/}
+      <form className="edit-warehouse__forms" onSubmit={handleSaveClick}>
+        <div className="edit-warehouse__warehouse-form">
+          <div className="edit-warehouse__warehouse-details">
+            <h2 className="edit-warehouse__warehouse-title">
+              Warehouse Details
+            </h2>
+            <div className="edit-warehouse__form-container">
+              <label className="edit-warehouse__label">Warehouse Name</label>
+              <input
+                type="text"
+                className="edit-warehouse__input"
+                name="warehouse_name"
+                placeholder="Warehouse Name"
+                value={formData.warehouse_name || ""}
+                onChange={handleChange}
+              />
+              {errors.warehouse_name && <p>{errors.warehouse_name}</p>}
+            </div>
+            <div className="edit-warehouse__form-container">
+              <label className="edit-warehouse__label">Street Address</label>
+              <input
+                type="text"
+                className="edit-warehouse__input"
+                name="address"
+                placeholder="Address"
+                value={formData.address || ""}
+                onChange={handleChange}
+              />
+              {errors.address && <p>{errors.address}</p>}
+            </div>
+            <div className="edit-warehouse__form-container">
+              <label className="edit-warehouse__label">City</label>
+              <input
+                type="text"
+                className="edit-warehouse__input"
+                name="city"
+                placeholder="City"
+                value={formData.city || ""}
+                onChange={handleChange}
+              />
+              {errors.city && <p>{errors.city}</p>}
+            </div>
+            <div className="edit-warehouse__form-container">
+              <label className="edit-warehouse__label">Country</label>
+              <input
+                type="text"
+                className="edit-warehouse__input"
+                name="country"
+                placeholder="Country"
+                value={formData.country || ""}
+                onChange={handleChange}
+              />
+              {errors.country && <p>{errors.country}</p>}
+            </div>
+          </div>
+        </div>
+
+        {/*Contact Details Section*/}
+        <div className="edit-warehouse__contact-form">
+          <h2 className="edit-warehouse__contact-title">Contact Details</h2>
+          <div className="edit-warehouse__form-container">
+            <label className="edit-warehouse__label">Contact Name</label>
+            <input
+              type="text"
+              className="edit-warehouse__input"
+              name="contact_name"
+              placeholder="Contact Name"
+              value={formData.contact_name || ""}
+              onChange={handleChange}
+            />
+            {errors.contact_name && <p>{errors.contact_name}</p>}
+          </div>
+          <div className="edit-warehouse__form-container">
+            <label className="edit-warehouse__label">Position</label>
+            <input
+              type="text"
+              className="edit-warehouse__input"
+              name="contact_position"
+              placeholder="Position"
+              value={formData.contact_position || ""}
+              onChange={handleChange}
+            />
+            {errors.contact_position && <p>{errors.contact_position}</p>}
+          </div>
+          <div className="edit-warehouse__form-container">
+            <label className="edit-warehouse__label">Phone Number</label>
+            <input
+              type="text"
+              className="edit-warehouse__input"
+              name="contact_phone"
+              placeholder="Phone Number"
+              value={formData.contact_phone || ""}
+              onChange={handleChange}
+            />
+            {errors.contact_phone && <p>{errors.contact_phone}</p>}
+          </div>
+          <div className="edit-warehouse__form-container">
+            <label className="edit-warehouse__label">Email</label>
+            <input
+              type="email"
+              className="edit-warehouse__input"
+              name="contact_email"
+              placeholder="Email"
+              value={formData.contact_email || ""}
+              onChange={handleChange}
+            />
+            {errors.contact_email && <p>{errors.contact_email}</p>}
+
+          </div>
+          
+        </div>
+      </form>
+       {/*Buttons Section*/}
+       <div className="edit-warehouse__form-buttons">
+              <button
+                type="button"
+                className="edit-warehouse__button-cancel"
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="edit-warehouse__button-save">
+                Save
+              </button>
+            </div>
+    </div>
+  );
+}
+
+export default EditWarehouse;
