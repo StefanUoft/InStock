@@ -1,7 +1,9 @@
-@use "./fonts" as*;
-@use "./variables" as *;
-@use "./mixins" as*;
+//functional 
+// @use "./fonts" as*;
+// @use "./variables" as *;
+// @use "./mixins" as*;
 
+@use "./variables" as variables;
 
 * {
   margin: 0;

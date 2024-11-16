@@ -1,10 +1,10 @@
-
-
 // responsive design
-@use "./fonts" as*;
-@use "./variables" as *;
+// @use "./fonts" as*;
+// @use "./variables" as *;
 
 
+@use "./variables" as variables;
+@use "../partials/variables" as *;
 
 @mixin tablet {
   @media (min-width: 768px) {

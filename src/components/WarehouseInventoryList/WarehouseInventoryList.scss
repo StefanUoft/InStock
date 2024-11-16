@@ -1,0 +1,172 @@
+@use "/src/styles/partials/variables" as *;
+@use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
+
+.details {
+  @include p2;
+
+  @include tablet {
+    @include h4;
+  }
+
+  &__titles {
+    display: none;
+
+    @include tablet {
+      @include h4;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 1rem;
+      background-color: $light-grey-color ;
+    }
+  }
+
+  &__title {
+    @include h4;
+    display: flex;
+    width: 20%;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+
+    &:nth-child(4) {
+      width: 15%;
+    }
+    &:nth-child(5) {
+      width: 15%;
+      justify-content: flex-end;
+      padding-right:1rem ;
+    }
+  }
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    @include h3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: .0625rem solid $cloud-color;
+
+    &:hover {
+      background-color: rgba($indigo-color, 0.07);
+    }
+      
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      gap: 0;
+      padding:1rem;
+    }
+
+    &-title {
+      &--status {
+        padding-bottom: 0.5rem;
+      }
+      @include tablet {
+        display: none;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+      
+      @include tablet {
+        width: 20%;
+
+        &:nth-child(1) {
+          order: -2;
+        }
+
+        &:nth-child(3) {
+          order: -1;
+        }
+
+        &:nth-child(4) {
+          width: 15%;
+        }
+      }
+    }
+
+    &-value {
+      @include h4;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      border-radius: 1.25rem;
+      width: fit-content;
+      padding: 0.25rem 0.5rem;
+
+      @include tablet{
+        font-weight: 600;
+      }
+
+      &--category{
+      @include p2;
+      color: $black-color;
+      text-transform: lowercase; 
+        &::first-letter {
+          text-transform: uppercase; 
+        }
+      }
+
+      &--quantity{
+        @include p2;
+        color: $black-color;
+      }
+
+      &--in-stock {
+        color: $green-color;
+        background-color: rgba($green-color, 0.07);
+      }
+
+      &--out-of-stock {
+        color: $red-color;
+        background-color: rgba($red-color, 0.07);
+      }
+
+      &-name {
+        @include h3;
+        color: $indigo-color;
+        text-transform: lowercase; 
+        &::first-letter {
+          text-transform: uppercase; 
+        }
+      
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    @include tablet {
+      justify-content: flex-end;
+      width: 15%;
+      gap: 1rem;
+    }
+
+    &-button {
+      all: unset;
+      cursor: pointer;
+      display: inline-flex;
+    }
+  }
+}
