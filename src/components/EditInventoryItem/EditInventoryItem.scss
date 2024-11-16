@@ -76,7 +76,7 @@
 
   &__input,
   &__input-selection,
-  &__Quantity-input {
+  &__quantity-input {
     border-radius: 1.25rem;
     line-height: 1.75rem;
     border: 1px solid $cloud-color;
@@ -135,7 +135,7 @@
       width: 139px;
     }
 
-    &__button-add{
+    &__button-save{
       @include button-primary;
       width: 139px;
     }

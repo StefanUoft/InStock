@@ -4,6 +4,9 @@ import './App.scss';
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import '../src/app.scss'
+
+
 
 function App() {
   return (
