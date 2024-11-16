@@ -1,0 +1,133 @@
+@use "/src/styles/partials/variables" as *;
+@use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
+
+body {
+  background-color: $graphite-color;
+  padding: 1.25rem;
+}
+
+.item-details {
+  @include p1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.0625rem solid $cloud-color;
+  background-color: $light-grey-color;
+  padding: 1.25rem 0rem 1.25rem 0rem;
+  border-radius: 0.25rem;
+  margin: 0.25rem 0;
+  width:100%;
+
+  &__banner {
+    border-bottom: 0.0625rem solid $cloud-color;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    padding: 2rem;
+    justify-content:space-between;
+
+    &__left{
+      display:flex;
+      flex-direction:row;
+      flex-wrap:nowrap;
+      flex-grow:1;
+      
+    }
+    &__back-arrow {
+      margin-right: 0.5rem;
+    }
+
+    &__name {
+      @include h1;
+      color: $black-color;
+      padding:1rem 1rem;
+    }
+
+    &__edit-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $indigo-color;
+      background-size: contain;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      margin-left: auto;
+
+      @include tablet {
+        width: 5rem;
+        border-radius: 1.5rem;
+        justify-content: space-between;
+        padding: 0 0.75rem;
+      }
+
+      &-text {
+        display: none;
+
+        @include tablet {
+          display: flex;
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__info {
+    @include p3;
+    display: flex;
+    flex-direction: column;
+    align-self:center;
+    //flex-wrap: wrap;
+    //justify-content:space-evenly;
+    padding: 1rem 1rem 1rem 1rem;
+    //gap: 1rem;
+
+    @include tablet {
+      flex-wrap: nowrap;
+      padding: 1 2 1 2;
+    }
+  
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-top: 1rem;
+      p{
+        padding-top:0.25rem;
+      }
+      @include tablet {
+        width: 100%;
+      }
+      &--category {
+        @include tablet {
+          width: 100%;
+          border-left: 0.0625rem solid $cloud-color;
+          padding-left: 2rem;
+          padding-top: 0;
+          margin-left: 7rem;
+        }
+      }
+
+      &--description {
+        @include desktop{
+          padding-left: 1rem;
+          padding-right: 3rem;
+        }
+      }
+      &--availability{
+        
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        justify-content:space-between;
+      }
+
+      &--quantity{
+        padding-right:7rem;
+      }
+
+    
+    }
+  }
+}
