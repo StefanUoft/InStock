@@ -8,9 +8,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function InventoriesList() {
+function InventoryList() {
   const apiUrl = import.meta.env.VITE_API_URL;
-  const [inventoryData, setInventoryData] = useState([""]);
+  const [inventoryData, setInventoryData] = useState([]);
 
   console.log(import.meta.env.VITE_API_URL);
   useEffect(() => {
@@ -157,7 +157,7 @@ function InventoriesList() {
                 />
               </button>
               <Link
-                to={`/inventory/${item.id}/edit`}
+                to={`/inventory/edit/${item.id}`}
                 className="inventory__actions-button"
               >
                 {" "}
@@ -175,4 +175,4 @@ function InventoriesList() {
   );
 }
 
-export default InventoriesList;
+export default InventoryList;

@@ -4,6 +4,7 @@
 
 .inventory {
   @include p2;
+  background-color: $white-color;
   
   &__banner {
     display: flex;
