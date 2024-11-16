@@ -1,8 +1,7 @@
 import React from "react";
-import "./App.scss";
+// import "./App.scss";
 // import EditWarehouse from './components/EditWarehouse/EditWarehouse.jsx';
 // import AddWarehouse from './components/AddWarehouse/AddWarehouse.jsx';
-import "./App.scss";
 import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -14,9 +13,9 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/warehouses/:id" element={<WarehouseDetails />} />
+          <Route path="/warehouses/:id" element={<WarehouseDetails />} />{" "}
           {/* <Route path="/" element={<AddWarehouse />} /> */}
-          {/* <Route path="/edit-warehouse" element={<EditWarehouse />} /> */}
+          {/* <Route path="/edit-warehouse" element={<EditWarehouse />} /> */}{" "}
         </Routes>
       </BrowserRouter>
     </>

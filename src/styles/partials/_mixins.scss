@@ -4,6 +4,9 @@
 
 
 @use "./variables" as variables;
+@use "./variables" as variables;
+
+// responsive design
 @use "../partials/variables" as *;
 
 @mixin tablet {
