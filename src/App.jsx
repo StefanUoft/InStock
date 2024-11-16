@@ -3,9 +3,8 @@ import WarehouseDetails from "./components/WarehouseDetails/WarehouseDetails";
 import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
 import AddWarehouse from "./components/AddWarehouse/AddWarehouse";
 import EditInventoryItem from "./components/EditInventoryItem/EditInventoryItem";
-import AddInventoryItem from "./components/AddInventoryItem/AddInventoryItem";
+import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import EditWarehouse from './components/EditWarehouse/EditWarehouse.jsx';
 import './App.scss';
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
           <Route path="/inventory" element={<p>InventoryItemList</p>}/>
           <Route path="/inventory/:id" element={<p>InventoryItemList</p>} /> 
           <Route path="/inventory/edit/:id" element={<EditInventoryItem/>} />
-          <Route path="/inventory/add" element={<AddInventoryItem/>} />
+          <Route path="/inventory/add" element={<AddNewInventoryItem/>} />
           <Route path="*" element={<WarehouseList />} />
         </Routes>
       </BrowserRouter>
