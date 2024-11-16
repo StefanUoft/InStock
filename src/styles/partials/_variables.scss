@@ -1,18 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
 
 // colors
-$black-color: #13182c;
-$indigo-color: #2e66e5;
-$white-color: #ffffff;
+//primary colours
+$black-color: #13182c; //global text colour
+$indigo-color: #2e66e5; //interactive elements
+$white-color: #ffffff; //global white colour
 
-$slate-color: #5c667e;
-$cloud-color: #bdc5d5;
+//secondary colours
+$slate-color: #5c667e; //table column headers & placeholder text
+$cloud-color: #bdc5d5; //outlines, dividers, borders, table sorting icon
 
-$graphite-color: #232940;
-$light-grey-color: #f7f8f9;
+//background colours
+$graphite-color: #232940; //top navigation header background, CTA button hover state background
+$light-grey-color: #f7f8f9; //page background, table column header bg, CTA bg
 
-$green-color: #158463;
-$red-color: #c94515;
+//supporting colours
+$green-color: #158463; // "in stock" label
+$red-color: #c94515; //"out of stock" label, error states & delete icon
 
 // font
 $titillium: 'Titillium Web', sans-serif;
