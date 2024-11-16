@@ -1,0 +1,143 @@
+@use "../../styles/partials/fonts" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+
+.add-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 0.1875rem;
+  justify-content: center;
+
+  &__header {
+    display: flex;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet{
+      padding: 2rem;
+    }
+  }
+
+  &__header-back-button {
+    border: none;
+    background-color: transparent;
+    padding-right: 0.5rem;
+  }
+
+  &__header-title {
+    @include h1;
+  }
+
+  &__forms {
+    padding: 1rem;
+    @include tablet{
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem 2rem;
+    
+    }
+  }
+
+  &__details-form{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet{
+      border-bottom: none;
+      border-right: 1px solid $cloud-color;
+      padding-right: 2.5rem;
+      width: 50%;
+    }
+  }
+
+  &__avail-form{
+    @include tablet{
+      width: 50%;
+      padding-left: 2rem;
+    }
+  }
+
+  &__item-details-title,
+  &__availability-title {
+    @include h2;
+    padding: 1rem 0;
+  }
+
+  &__form-container {
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  &__label {
+    @include h3;
+    padding: 0.25rem 0;
+  }
+
+  &__input,
+  &__input-selection,
+  &__quantity-input {
+    border-radius: 1.25rem;
+    line-height: 1.75rem;
+    border: 1px solid $cloud-color;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+
+    @include tablet{
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__input-description {
+    border-radius: 1.25rem;
+    border: 1px solid $cloud-color;
+    padding: 0.5rem 1rem;
+    line-height: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input-selection {
+    appearance: none;
+    background: url("../../assets/Icons/arrow_drop_down-24px.svg") no-repeat
+      right 0.75rem center;
+    background-size: 24px 24px;
+    padding-right: 2rem;
+  }
+
+  &__status{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-bottom: 0.5rem;
+    @include tablet{
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__status-radio{
+    display: flex;
+    gap: 0.5rem;
+  }
+
+
+
+  &__form-buttons{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    @include tablet{
+      justify-content: flex-end;
+      padding-right: 2rem;
+    }
+  }
+
+  &__button-cancel{
+    @include button-secondary;
+    width: 8.6875rem;
+  }
+
+  &__button-add{
+    @include button-primary;
+    width: 8.6875rem;
+  }
+}
