@@ -135,9 +135,7 @@
     }
 
     &-title {
-      &--status {
-        //padding-bottom: 0.5rem;
-      }
+     
 
       @include tablet {
         display: none;

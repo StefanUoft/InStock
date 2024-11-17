@@ -23,6 +23,7 @@
   font-weight: $titillium-semi-bold;
   font-size: 1.75rem;
   line-height: 2.25rem;
+  overflow-y:hidden;
 
   @include tablet {
     font-size: 2rem;
@@ -203,7 +204,8 @@
   position:absolute;
   left:0;
   right:0;
-  width:90%;
+  width:90%;//side margins to pop out
+  height:80%;//so the footer appears
   z-index:1;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 

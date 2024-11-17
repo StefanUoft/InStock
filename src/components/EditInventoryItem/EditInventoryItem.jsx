@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, /*useNavigate*/ } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./EditInventoryItem.scss";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 import axios from "axios";
 
 const EditInventoryItem = () => {
   const { id } = useParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -87,9 +87,9 @@ const EditInventoryItem = () => {
     }
   };
 
-  // const handleCancel = () => {
-  //   navigate("/inventory");
-  // };
+  const handleCancel = () => {
+    navigate("/inventory");
+  };
 
   return (
     <div className="edit-item">
@@ -201,7 +201,7 @@ const EditInventoryItem = () => {
       </form>
 
       <div className="edit-item__form-buttons">
-        <button className="edit-item__button-cancel" /* onClick={handleCancel} */>
+        <button className="edit-item__button-cancel" onClick={handleCancel} >
           Cancel
         </button>
         <button className="edit-item__button-save" onClick={handleSave}>

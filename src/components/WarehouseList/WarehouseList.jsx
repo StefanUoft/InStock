@@ -90,7 +90,7 @@ function WarehouseList() {
                         <p className="p2">{wh.contact_email}</p>
                     </div>
                     <div className="warehouse-list__card__actions">
-                        {deleteButton(wh.warehouse_name)}
+                        {deleteButton(wh)}
                         <Link to={`/warehouses/edit/${wh.id}`}>
                             <img src={editIcon} alt="Edit icon" />
                         </Link>

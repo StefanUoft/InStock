@@ -83,6 +83,8 @@ function EditWarehouse() {
   };
 
   const formatPhoneNumber = (phoneNumber) => {
+    phoneNumber=phoneNumber.replaceAll("(","")
+    phoneNumber=phoneNumber.replaceAll(")","")
     const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
     return parsedPhoneNumber
       ? parsedPhoneNumber.formatInternational()
@@ -98,7 +100,7 @@ function EditWarehouse() {
 
   const handleSaveClick = async (e) => {
     e.preventDefault();
-
+    
     if (window.confirm("Are you ready to save?")) {
       let valid = true;
       const newErrors = {};
@@ -232,7 +234,9 @@ function EditWarehouse() {
           <button type="button" onClick={handleCancelClick}>
             Cancel
           </button>
-          <button type="submit">Save</button>
+          <button onClick={handleSaveClick} type="submit">
+            Save
+          </button>
         </div>
       </form>
     </div>

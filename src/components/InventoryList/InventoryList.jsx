@@ -15,7 +15,7 @@ function InventoryList() {
   const [selectedInventory, setSelectedInventory] = useState(null);
   const [inventoryData, setInventoryData] = useState([]);
 
-  console.log(import.meta.env.VITE_API_URL);
+  
   useEffect(() => {
     async function getInventoryList() {
       try {
@@ -109,10 +109,10 @@ function InventoryList() {
             <div className="inventory__item-wrapper">
               <h4 className="inventory__item-title">INVENTORY ITEM</h4>
               <Link
-                to={`/inventoryItem/${item.id}`}
+                to={`/inventory/${item.id}`}
                 className="inventory__item-value"
               >
-                <p className="inventory__item-value-name" onClick={""}>
+                <p className="inventory__item-value-name">
                   {item.item_name}
                 </p>
                 <img
