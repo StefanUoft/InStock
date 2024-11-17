@@ -1,0 +1,178 @@
+@use "/src/styles/partials/variables" as *;
+@use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
+
+
+.main-content{
+  background-color: $light-grey-color;
+  width:100%;
+  height:100%;
+}
+
+.item-details {
+  @include p1;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.0625rem solid $cloud-color;
+  background-color: $white-color;
+  padding: 0rem;
+  border-radius: 0.25rem;
+  position:absolute;
+  left:0;
+  right:0;
+  margin:-7rem auto 0.25rem auto;
+  width:80%;
+  z-index:1;
+
+  &__banner {
+    border-bottom: 0.0625rem solid $cloud-color;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    height:7rem;
+    padding:1rem;
+    justify-content:space-between;
+    
+    @include tablet{
+      padding: 2rem 3rem;
+    }
+
+    &__left{
+      display:flex;
+      flex-direction:row;
+      flex-wrap:nowrap;
+      flex-grow:1;
+      
+    }
+    &__back-arrow {
+      margin-right: 0.5rem;
+    }
+
+    &__name {
+      @include h1;
+      color: $black-color;
+      padding:1rem 1rem 1rem 0rem;
+    }
+
+    &__edit-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $indigo-color;
+      background-size: contain;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 50%;
+      margin-left: auto;
+
+      @include tablet {
+        width: 5rem;
+        border-radius: 1.5rem;
+        justify-content: space-between;
+        padding: 0 0.75rem;
+      }
+
+      &-text {
+        display: none;
+
+        @include tablet {
+          display: flex;
+          color: white;
+        }
+      }
+    }
+  }
+
+  &__info {
+    @include p2;
+    display: flex;
+    flex-direction: column;
+    align-self:center;
+    padding:1rem;
+
+    @include tablet {
+      width:100%;
+      flex-direction:row;
+      justify-content:center;
+      padding:2rem 3.25rem;
+    }
+    &__first{
+      width:100%;
+    }
+    &__second{
+      width:100%;
+      @include tablet{
+        border-left: 0.0625rem solid $cloud-color;
+        padding-bottom:0.5rem;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-top: 1rem;
+      p{
+        padding-top:0.25rem;
+      }
+      @include tablet {
+        width: 100%;
+        align-content:flex-start;
+      }
+      &--category {
+        display:auto;
+      }
+
+      &--contact{
+        @include tablet{
+          padding-left:4rem;
+        }
+      }
+      &--availability{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:nowrap;
+        @include tablet{
+          padding-left:4rem;
+          gap:8rem;
+        }
+      }
+
+      &--quantity{
+        padding-left:6rem;
+        @include tablet{
+          padding-left:0rem;
+        }
+      }
+    }
+  }
+
+  .stock {
+    @include h4;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+    border-radius: 1.25rem;
+    padding:0rem 0.5rem;
+    margin-top:0.25rem;
+    height:1.5rem;
+    font-weight:600;
+    @include tablet {
+      height:1.625rem;
+    }
+
+    &--in {
+      color: $green-color;
+      background-color: rgba($green-color, 0.07);
+    }
+  
+    &--out {
+      color: $red-color;
+      background-color: rgba($red-color, 0.07);
+    }
+  }
+  
+}
+
