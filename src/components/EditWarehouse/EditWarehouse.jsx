@@ -83,8 +83,11 @@ function EditWarehouse() {
   };
 
   const formatPhoneNumber = (phoneNumber) => {
-    phoneNumber=phoneNumber.replaceAll("(","")
-    phoneNumber=phoneNumber.replaceAll(")","")
+    phoneNumber = phoneNumber
+      .replaceAll("(", "")
+      .replaceAll(")", "")
+      .replaceAll(" ", "");
+
     const parsedPhoneNumber = parsePhoneNumberFromString(phoneNumber, "US");
     return parsedPhoneNumber
       ? parsedPhoneNumber.formatInternational()
@@ -100,7 +103,9 @@ function EditWarehouse() {
 
   const handleSaveClick = async (e) => {
     e.preventDefault();
-    
+
+    console.log(e.target.elements.contact_phone.value);
+
     if (window.confirm("Are you ready to save?")) {
       let valid = true;
       const newErrors = {};
@@ -112,6 +117,8 @@ function EditWarehouse() {
           valid = false;
         }
       });
+
+      console.log(newErrors);
 
       setErrors(newErrors);
 
@@ -234,9 +241,7 @@ function EditWarehouse() {
           <button type="button" onClick={handleCancelClick}>
             Cancel
           </button>
-          <button onClick={handleSaveClick} type="submit">
-            Save
-          </button>
+          <button type="submit">Save</button>
         </div>
       </form>
     </div>
