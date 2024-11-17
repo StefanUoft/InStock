@@ -195,3 +195,21 @@
     background-color: $graphite-color;
   }
 }
+
+@mixin page-content{
+  background-color: $white-color;
+  padding: 0;
+  border-radius: 0.25rem;
+  position:absolute;
+  left:0;
+  right:0;
+  width:90%;
+  z-index:1;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+
+  margin:-4rem auto 0.25rem auto; 
+
+  @include tablet{
+    margin:-6.75rem auto 0.25rem auto;
+  }
+}
