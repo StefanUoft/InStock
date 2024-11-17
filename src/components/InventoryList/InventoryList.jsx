@@ -19,7 +19,7 @@ function InventoryList() {
   useEffect(() => {
     async function getInventoryList() {
       try {
-        const response = await axios.get(`${apiUrl}/api/inventories`);
+        const response = await axios.get(`http://${apiUrl}/api/inventories`);
         setInventoryData(response.data);
       } catch (error) {
         console.error("Failed to fetch inventory data:", error);
@@ -27,10 +27,6 @@ function InventoryList() {
     }
     console.log(getInventoryList());
   }, [apiUrl]);
-
-  const handleDelete = (event) => {
-    event.preventDefault();
-  };
 
   const openModal = (inventoryItem) => {
     setSelectedInventory(inventoryItem);
@@ -189,7 +185,7 @@ function InventoryList() {
           isOpen={isModalOpen}
           onRequestClose={closeModal}
           selectedInventory={selectedInventory}
-          setInventories={setInventories}
+          setInventories={setInventoryData}
         />
       )}
     </div>

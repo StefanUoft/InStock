@@ -14,7 +14,7 @@ function WarehouseDetails() {
   useEffect(() => {
     async function getWarehouseData() {
       try {
-        const response = await axios.get(`${apiUrl}/api/warehouses/${id}`);
+        const response = await axios.get(`http://${apiUrl}/api/warehouses/${id}`);
         setWarehouseData(response.data);
       } catch (error) {
         console.error("Failed to fetch warehouse data:", error);
