@@ -1,6 +1,8 @@
 @use "./styles/partials/mixins" as *;
 @use "./styles/partials/variables" as *;
 
+
+
 a {
     text-decoration: none; 
     color: inherit;        
@@ -9,8 +11,11 @@ a {
 
 body {
     min-width: 20rem;
-    margin: auto;
   } 
+
+#root{
+    width:100%;
+}
   
 h1{
     @include h1;
