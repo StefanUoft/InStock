@@ -6,6 +6,7 @@ import AddWarehouse from "./components/AddWarehouse/AddWarehouse";
 import EditInventoryItem from "./components/EditInventoryItem/EditInventoryItem";
 import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import InventoryList from "./components/InventoryList/InventoryList"; 
 import './App.scss';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route path="/warehouses/:id" element={<WarehouseDetails />} />
           <Route path="/warehouses/edit/:id" element={<EditWarehouse/>}/>
           <Route path="/warehouses/add" element={<AddWarehouse/>}/>
-          <Route path="/inventory" element={<p>InventoryItemList</p>}/>
+          <Route path="/inventory" element={<InventoryList/>}/>
           <Route path="/inventory/:id" element={<p>InventoryItemList</p>} /> 
           <Route path="/inventory/edit/:id" element={<EditInventoryItem/>} />
           <Route path="/inventory/add" element={<AddNewInventoryItem/>} />

@@ -9,7 +9,7 @@ import { Link, useParams } from "react-router-dom";
 
 function InventoryList() {
   const apiUrl = import.meta.env.VITE_API_URL;
-  const [inventoryData, setInventoryData] = useState([""]);
+  const [inventoryData, setInventoryData] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -33,7 +33,6 @@ function InventoryList() {
           INVENTORY ITEM{" "}
           <img src={sortIcon} alt="sort-icon" className="details__title-icon" />
         </h4>
-
         <h4 className="details__title">
           CATEGORY{" "}
           <img src={sortIcon} alt="sort-icon" className="details__title-icon" />
@@ -58,7 +57,7 @@ function InventoryList() {
             <div className="details__item-wrapper">
               <h4 className="details__item-title">INVENTORY ITEM</h4>
               <Link
-                to={`/inventoryItem/${item.id}`}
+                to={`/inventory/${item.id}`}
                 className="details__item-value"
               >
                 <p className="details__item-value-name" onClick={""}>
@@ -105,14 +104,14 @@ function InventoryList() {
                   className="details__actions-icon"
                 />
               </button>
-              <button className="details__actions-button">
+              <Link  to={`/inventory/edit/${item.id}`} className="details__actions-button" >
                 {" "}
                 <img
                   src={editIcon}
                   alt="edit-Icon"
                   className="details__actions-icon"
                 />
-              </button>
+              </Link>
             </div>
           </li>
         ))}
