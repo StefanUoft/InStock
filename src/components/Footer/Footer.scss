@@ -1,0 +1,17 @@
+@use "/src/styles/partials/variables";
+@use "/src/styles/partials/fonts";
+@use "/src/styles/partials/mixins";
+@use "/src/styles/partials/global";
+
+.footer {
+    background-color: variables.$light-grey-color;
+    height: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__copyright {
+        @include mixins.p3;
+        color: variables.$slate-color;
+    }
+}
