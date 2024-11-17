@@ -7,6 +7,7 @@ import searchIcon from "/src/assets/Icons/search-24px.svg";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import DeleteInventoryModal from "../DeleteInventoryModal/DeleteInventoryModal";
 
 function InventoryList() {
   const apiUrl = import.meta.env.VITE_API_URL;
