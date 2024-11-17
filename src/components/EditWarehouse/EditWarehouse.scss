@@ -1,18 +1,9 @@
-@use "../../styles/partials/fonts" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/global" as *;
-
-
-
-
 .edit-warehouse {
   display: flex;
   flex-direction: column;
   width: 100%;
   border: 1px solid $cloud-color;
   border-radius: 0.1875rem;
-
   &__header {
     display: flex;
     padding: 1.5rem 1rem;
@@ -21,7 +12,6 @@
       padding: 2rem;
     }
   }
-
   &__header-back-button {
     display: flex;
     align-items: center;
@@ -29,12 +19,10 @@
     background-color: transparent;
     padding: 0rem 0.5rem 0 0;
   }
-
   &__header-title {
     @include h1;
     overflow-y: hidden;
   }
-
   &__forms {
     width: 100%;
     display: flex;
@@ -76,7 +64,6 @@
     @include h2;
     padding: 1rem 0;
   }
-
   &__form-container {
     display: flex;
     flex-direction: column;
@@ -86,7 +73,6 @@
     @include h3;
     padding: 0.25rem 0;
   }
-
   &__input {
     @include p2;
     width: 95%;
@@ -117,7 +103,6 @@
   }
   &__button-save {
     @include button-primary;
-
     @include tablet {
       width: auto;
     }
