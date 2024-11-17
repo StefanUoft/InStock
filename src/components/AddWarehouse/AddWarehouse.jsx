@@ -1,10 +1,9 @@
 import "./AddWarehouse.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
 import axios from "axios";
-const apiUrl = import.meta.env.VITE_API_URL;
 
 function AddWarehouse() {
   const navigate = useNavigate();
@@ -19,7 +18,25 @@ function AddWarehouse() {
     contact_email: "",
   });
 
+  const [warehouses, setWarehouses] = useState([]);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/warehouses`
+        );
+        console.log("Response from /api/warehouses:", response);
+        setWarehouses(Array.isArray(response.data) ? response.data : []);
+      } catch (error) {
+        console.error("Error fetching warehouses:", error);
+        setWarehouses([]);
+      }
+    };
+
+    fetchWarehouses();
+  }, []);
 
   const validateInput = (name, value) => {
     let error = "";
@@ -81,7 +98,6 @@ function AddWarehouse() {
 
   const handleAddClick = async (e) => {
     e.preventDefault();
-
     const newErrors = {};
     let isValid = true;
 
@@ -97,7 +113,10 @@ function AddWarehouse() {
 
     if (isValid) {
       try {
-        const response = await axios.post(`${apiUrl}/api/warehouses`, formData);
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/api/warehouses`,
+          formData
+        );
         console.log("Warehouse added successfully:", response.data);
         alert("Warehouse added successfully. Thank you!");
 
@@ -238,6 +257,7 @@ function AddWarehouse() {
           </div>
         </div>
       </form>
+
       {/*Buttons Section*/}
       <div className="add-warehouse__form-buttons">
         <button
@@ -246,7 +266,7 @@ function AddWarehouse() {
         >
           Cancel
         </button>
-        <button type="submit" className="add-warehouse__button-add">
+        <button onClick={handleAddClick} type="submit" className="add-warehouse__button-add">
           + Add Warehouse
         </button>
       </div>

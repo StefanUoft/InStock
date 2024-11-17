@@ -24,7 +24,12 @@ function EditWarehouse() {
 
   useEffect(() => {
     const fetchWarehouseDetails = async () => {
+    const fetchWarehouseDetails = async () => {
       try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/warehouses/${id}`
+        );
+        setFormData(response.data);
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/api/warehouses/${id}`
         );
@@ -32,9 +37,12 @@ function EditWarehouse() {
       } catch (error) {
         console.error("Error fetching warehouse details:", error);
         alert("Failed to fetch warehouse details. Please try again.");
+        console.error("Error fetching warehouse details:", error);
+        alert("Failed to fetch warehouse details. Please try again.");
       }
     };
 
+    fetchWarehouseDetails();
     fetchWarehouseDetails();
   }, [id]);
 
@@ -108,6 +116,10 @@ function EditWarehouse() {
         if (error) {
           newErrors[key] = error;
           valid = false;
+        const error = validateInput(key, formData[key]);
+        if (error) {
+          newErrors[key] = error;
+          valid = false;
         }
       });
 
@@ -116,6 +128,7 @@ function EditWarehouse() {
       if (valid) {
         try {
           const response = await axios.put(
+            `${import.meta.env.VITE_API_URL}/api/warehouses/${id}`,
             `${import.meta.env.VITE_API_URL}/api/warehouses/${id}`,
             formData
           );
@@ -147,7 +160,45 @@ function EditWarehouse() {
       </div>
 
       {/* Warehouse Details Form */}
+      {/* Warehouse Details Form */}
       <form className="edit-warehouse__forms" onSubmit={handleSaveClick}>
+        <div className="edit-warehouse__warehouse-details">
+          <h2>Warehouse Details</h2>
+          <label>Warehouse Name</label>
+          <input
+            type="text"
+            name="warehouse_name"
+            value={formData.warehouse_name || ""}
+            onChange={handleChange}
+          />
+          {errors.warehouse_name && <p>{errors.warehouse_name}</p>}
+
+          <label>Street Address</label>
+          <input
+            type="text"
+            name="address"
+            value={formData.address || ""}
+            onChange={handleChange}
+          />
+          {errors.address && <p>{errors.address}</p>}
+
+          <label>City</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city || ""}
+            onChange={handleChange}
+          />
+          {errors.city && <p>{errors.city}</p>}
+
+          <label>Country</label>
+          <input
+            type="text"
+            name="country"
+            value={formData.country || ""}
+            onChange={handleChange}
+          />
+          {errors.country && <p>{errors.country}</p>}
         <div className="edit-warehouse__warehouse-details">
           <h2>Warehouse Details</h2>
           <label>Warehouse Name</label>

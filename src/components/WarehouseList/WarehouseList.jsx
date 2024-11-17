@@ -21,7 +21,7 @@ function WarehouseList() {
         const fetchWarehouses = async () => {
             try {
                 const response = await axios.get(
-                    `http://${import.meta.env.VITE_API_URL}/api/warehouses`
+                    `${import.meta.env.VITE_API_URL}/api/warehouses`
                 );
 
                 if (Array.isArray(response.data)) {
@@ -37,18 +37,31 @@ function WarehouseList() {
         fetchWarehouses();
     }, [ isModalOpen ]);
 
-    const openModal = (warehouseName) => {
-        setSelectedWarehouse(warehouseName);
+
+    const openModal = (warehouse) => {
+        setSelectedWarehouse(warehouse);
         setIsModalOpen(true);
     };
-
+    
     const closeModal = () => {
         setIsModalOpen(false);
     };
-
-    const deleteWarehouse = () => {
-        console.log(`Deleting ${selectedWarehouse}`);
-        closeModal();
+    
+    const deleteWarehouse = async () => {
+        try {
+            await axios.delete(
+                `${import.meta.env.VITE_API_URL}/api/warehouses/${selectedWarehouse.id}`
+            );
+            setWarehouses((prev) =>
+                prev.filter((warehouse) => warehouse.id !== selectedWarehouse.id)
+            );
+            closeModal();
+        } catch (error) {
+            console.error(
+                "Error deleting warehouse:",
+                error.response?.data || error.message
+            );
+        }
     };
 
     const deleteButton = (name) => {
@@ -133,7 +146,6 @@ function WarehouseList() {
 
     return (
         <>
-        <Header />
         <div className="main-content">
         {warehouses ?  ( <div className="warehouse-list">
             <section className="warehouse-list__banner">
@@ -152,7 +164,8 @@ function WarehouseList() {
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
                 onDelete={deleteWarehouse}
-                itemName={selectedWarehouse}
+                itemName={selectedWarehouse.warehouse_name}
+                key={selectedWarehouse.id}
             />
         </div>
         ) : <></>

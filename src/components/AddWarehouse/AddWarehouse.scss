@@ -3,12 +3,7 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/global" as *;
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
+
 
 .add-warehouse {
   display: flex;
@@ -24,29 +19,29 @@ body {
     @include tablet {
       padding: 2rem;
     }
+    
   }
 
   &__header-back-button {
+    display:flex;
+    align-items:center;
     border: none;
     background-color: transparent;
-    padding-right: 0.5rem;
+    padding:0rem 0.5rem 0 0;
   }
 
   &__header-title {
     @include h1;
-    line-height: 3;
-
-    @include tablet {
-      @include h2;
-      line-height: normal;
-    }
+    //line-height: 3;
+    overflow-y:hidden;
+ 
   }
 
   &__forms {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    //padding: 1rem;
     @include tablet {
       display: flex;
       flex-direction: row;
@@ -66,22 +61,29 @@ body {
   }
   &__contact-form {
     flex: 1;
+    padding:0.5rem 1rem;
     @include tablet {
       padding-left: 2rem;
     }
   }
-
+  &__warehouse-details{
+    width:100%;
+    padding:0.5rem 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet{
+      border-bottom:none;
+    }
+  }
   &__warehouse-title,
   &__contact-title {
     @include h2;
-    font-size: 1rem;
-    line-height: 0.5;
     padding: 1rem 0;
   }
 
   &__form-container {
     display: flex;
     flex-direction: column;
+    padding:0.5rem 0rem;;
   }
 
   &__label {
@@ -90,7 +92,8 @@ body {
   }
 
   &__input {
-    font-size: 0.5rem;
+    @include p2;
+    width:95%;
     border-radius: 1.25rem;
     border: 1px solid $cloud-color;
     padding: 0.5rem 1rem;
@@ -113,15 +116,7 @@ body {
 
   &__button-cancel {
     @include button-secondary;
-    height: 1.6rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 0.5rem;
-    border-radius: 1.25rem;
-    font-size: 0.6rem;
-    width: 8rem;
+    overflow-y:hidden;
     @include tablet {
       width: auto;
     }
@@ -129,20 +124,10 @@ body {
 
   &__button-add {
     @include button-primary;
-    height: 1.6rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 0.5rem;
-    border-radius: 1.25rem;
-    font-size: 0.6rem;
-    width: 8rem;
-    font-size: 0.5rem;
+
     @include tablet {
       width: auto;
     }
-    @include desktop {
-    }
+
   }
 }
