@@ -1,19 +1,37 @@
 @use "../../styles/partials/_mixins.scss" as *;
 @use "../../styles/partials/_variables.scss" as *;
 
-body {
-  background-color: $graphite-color;
-  padding: 1.25rem;
+
+.main-content{
+  background-color: $light-grey-color;
+  width:100%;
+  height:100vh;
 }
 
 .warehouse-list {
-  background-color: $light-grey-color;
-  padding: 1.25rem 0rem 1.25rem 0rem;
+  background-color: $white-color;
+  padding: 0;
   border-radius: 0.25rem;
-  margin: 0.25rem 0;
+  position:absolute;
+  left:0;
+  right:0;
+  margin:-4rem auto 0.25rem auto;
+  width:90%;
+  z-index:1;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 
-  .table_header {
+  @include tablet{
+    margin:-6.75rem auto 0.25rem auto;
+  }
+
+  &__header {
     @include h4;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items:center;
+    color:$indigo-color
   }
 
   &__banner {
@@ -21,32 +39,54 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 1rem 1rem;
+    margin:1.25rem 1.5rem .5rem 1.5rem;
     text-align: left;
+    height:10rem;
 
     h1 {
       align-self: flex-start;
     }
 
-    .search {
-      height: 2.375rem;
+    @include tablet{
+      flex-direction:row;
+      height:5rem;
+    }
+    &__header{
+      display:flex;
+      justify-content:flex-start;
+      width:100%;
+      padding-bottom:0.5rem;
+      @include tablet{
+      h1{padding:0.25rem 0.5rem;}
+      width:18rem;}
+    }
+    &__interact{
+      display:flex;
+        flex-direction:column;
+        width:100%;
+        gap:1rem;
+      .search {
+        
+      height: 2.25rem;
       width: 100%;
-      padding: 0.25rem 1rem;
-      margin: 0.667rem auto;
+      padding: 0rem 1rem;
+      margin: 0rem;
       border-radius: 1.25rem;
       display: inline-flex;
       flex-direction: row;
       align-content: center;
       align-items: center;
-      background-color: $light-grey-color;
+      background-color: $white-color;
       border: 0.0625rem solid $cloud-color;
       
-      @include desktop {
-        max-width: 15rem;
-      }
-
       @include tablet {
-        max-width: 15rem;
+        margin: 0rem 1rem;
+        max-width: 15rem; 
+        height:2.375rem;
+      }
+      @include desktop{
+        max-width: 22rem;
+        height:2.375rem;
       }
 
       &__icon {
@@ -56,16 +96,72 @@ body {
       &__input {
         border: none;
         outline: none;
-        background-color: $light-grey-color;
+        background-color: $white-color;
         flex-grow: 1;
         margin-left: 0.5rem;
       }
+    }
+
+    @include tablet{
+      flex-direction:row;
+      align-items:center;align-content: center;
+      justify-content:flex-end;
+    }
+  }
+  }
+
+  &__table{
+    width:100%;
+    border-collapse:collapse;
+
+    &__header-pad{
+      padding:0.5rem 0rem 0.5rem 2rem;}
+    
+      &__right{
+        display:flex;
+        justify-content:flex-end;
+        padding-right:2rem;
+        text-align:right;
+            }
+
+    &__left{
+    padding:2rem 0rem 2rem 2rem;}
+
+    &__header-row{
+      background-color:$light-grey-color;
+    }
+
+    &__header{
+      vertical-align: middle;
+      display:flex;
+      align-items:center;
+    }
+
+    &__row{
+      padding:2rem 0;
+
+      &:hover{
+        background-color:rgba($indigo-color,0.07);
+      }
+      
+    }
+
+    &__actions{
+      display:inline-block;
+      padding-left:0.5rem;
+      &__delete{padding-right:1rem}
+
+    }
+    td{border-bottom:0.0625rem solid $cloud-color}
+    tr:last-child td{
+      border-bottom:none;
     }
   }
 
   &__table-view {
     display: none;
 
+    
     @include desktop {
       display: block;
     }
@@ -106,12 +202,6 @@ body {
       &--right{
         padding-left:0.25rem;
       }
-
-      &__link {
-        display: inline-flex;
-        align-items:center;
-        color:$indigo-color
-      }
     }
 
     &__actions {
@@ -123,9 +213,13 @@ body {
       padding-bottom: 1rem;
     }
   }
+  &__add-warehouse {
+    @include button-primary;
+    width: 100%;
+    @include tablet{
+      max-width:20rem;
+    }
+  }
+  
 }
 
-.add-warehouse {
-  @include button-primary;
-  width: 100%;
-}
