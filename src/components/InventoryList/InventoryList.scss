@@ -1,0 +1,235 @@
+@use "/src/styles/partials/variables" as *;
+@use "/src/styles/partials/mixins" as *;
+@use "/src/styles/partials/global" as *;
+
+.inventory {
+  @include p2;
+  background-color: $white-color;
+  
+  &__banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 0.0625rem solid $cloud-color;
+
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+    }
+    
+    &-title {
+      @include h1;
+      align-self: flex-start;
+      padding-top: 1rem;
+      padding-bottom: 0.25rem;
+      @include tablet {
+      padding-bottom: 0.5rem;
+      }
+    
+    }
+
+    &-form {
+      height: 2.375rem;
+      width: 100%;
+      padding: 0.25rem 1rem;
+      margin: 0.667rem auto;
+      border-radius: 1.25rem;
+      display: inline-flex;
+      flex-direction: row;
+      align-content: center;
+      align-items: center;
+      border: 0.0625rem solid $cloud-color;
+
+      @include tablet {
+        max-width: 15rem;
+        align-self: flex-end;
+        margin-right: 1rem;
+      }
+
+      @include desktop {
+        max-width: 15rem;
+      }
+    }
+
+    &-input {
+      border: none;
+      outline: none;
+      flex-grow: 1;
+      margin-left: 0.5rem;
+    }
+
+    &-icon {
+      margin-right: 0.5rem;
+    }
+
+    &-button {
+      @include button_primary;
+      width: 100%;
+
+      @include tablet{
+        width :8rem;
+      }
+    }
+  }
+
+  &__titles {
+    display: none;
+
+    @include tablet {
+      @include h4;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: $light-grey-color;
+    }
+  }
+
+  &__title {
+    @include h4;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    width: 15%;
+
+    &:last-child {
+      justify-content: flex-end;
+      padding-right: 1rem;
+    }
+  }
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    @include h3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 0.0625rem solid $cloud-color;
+
+    &:hover {
+      background-color: rgba($indigo-color, 0.07);
+    }
+
+    @include tablet {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 0;
+      padding: 1rem;
+    }
+
+    &-title {
+      &--status {
+        padding-bottom: 0.5rem;
+      }
+      @include tablet {
+        display: none;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      width: 45%;
+
+      @include tablet {
+        width: 15%;
+
+        &:nth-child(1) {
+          order: -2;
+        }
+
+        &:nth-child(3) {
+          order: -1;
+        }
+
+        &:nth-child(4) {
+          width: 15%;
+        }
+      }
+    }
+
+    &-value {
+      @include h4;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      border-radius: 1.25rem;
+      width: fit-content;
+
+      @include tablet {
+        font-weight: 600;
+      }
+
+      &--category {
+        @include p2;
+        color: $black-color;
+        text-transform: lowercase;
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+
+      &--quantity {
+        @include p2;
+        color: $black-color;
+      }
+
+      &--in-stock {
+        color: $green-color;
+        background-color: rgba($green-color, 0.07);
+      }
+
+      &--out-of-stock {
+        color: $red-color;
+        background-color: rgba($red-color, 0.07);
+      }
+
+      &-name {
+        @include h3;
+        color: $indigo-color;
+        text-transform: lowercase;
+
+        &::first-letter {
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    @include tablet {
+      justify-content: flex-end;
+      gap: 1rem;
+      width: 15%;
+    }
+
+    &-button {
+      all: unset;
+      cursor: pointer;
+      display: inline-flex;
+    }
+  }
+}
