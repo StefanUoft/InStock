@@ -5,7 +5,7 @@
 .inventory {
   @include p2;
   background-color: $white-color;
-  
+
   &__banner {
     display: flex;
     flex-direction: column;
@@ -19,16 +19,17 @@
       display: flex;
       flex-direction: row;
     }
-    
+
     &-title {
       @include h1;
       align-self: flex-start;
       padding-top: 1rem;
       padding-bottom: 0.25rem;
+
       @include tablet {
-      padding-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
       }
-    
+
     }
 
     &-form {
@@ -69,8 +70,8 @@
       @include button_primary;
       width: 100%;
 
-      @include tablet{
-        width :8rem;
+      @include tablet {
+        width: 8rem;
       }
     }
   }
@@ -135,8 +136,9 @@
 
     &-title {
       &--status {
-        padding-bottom: 0.5rem;
+        //padding-bottom: 0.5rem;
       }
+
       @include tablet {
         display: none;
       }
@@ -165,13 +167,13 @@
     }
 
     &-value {
-      @include h4;
+      @include p2;
       display: flex;
       flex-direction: row;
       align-items: center;
       width: 100%;
-      border-radius: 1.25rem;
       width: fit-content;
+      text-transform: none;
 
       @include tablet {
         font-weight: 600;
@@ -180,10 +182,7 @@
       &--category {
         @include p2;
         color: $black-color;
-        text-transform: lowercase;
-        &::first-letter {
-          text-transform: uppercase;
-        }
+
       }
 
       &--quantity {
@@ -192,23 +191,29 @@
       }
 
       &--in-stock {
+        @include h4;
         color: $green-color;
         background-color: rgba($green-color, 0.07);
+        text-transform: uppercase;
+        border-radius: 1.25rem;
+        padding: 0rem 0.5rem;
+        height: 1.5rem;
       }
 
       &--out-of-stock {
+        @include h4;
         color: $red-color;
         background-color: rgba($red-color, 0.07);
+        text-transform: uppercase;
+        border-radius: 1.25rem;
+        padding: 0rem 0.5rem;
+        height: 1.5rem;
       }
 
       &-name {
         @include h3;
         color: $indigo-color;
-        text-transform: lowercase;
 
-        &::first-letter {
-          text-transform: uppercase;
-        }
       }
     }
   }

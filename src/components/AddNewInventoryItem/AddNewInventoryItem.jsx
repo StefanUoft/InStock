@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./AddNewInventoryItem.scss";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 
 const AddNewInventoryItem = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("default");

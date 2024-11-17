@@ -21,7 +21,7 @@ function WarehouseList() {
         const fetchWarehouses = async () => {
             try {
                 const response = await axios.get(
-                    `http://${import.meta.env.VITE_API_URL}/api/warehouses`
+                    `${import.meta.env.VITE_API_URL}/api/warehouses`
                 );
 
                 if (Array.isArray(response.data)) {
@@ -50,7 +50,7 @@ function WarehouseList() {
     const deleteWarehouse = async () => {
         try {
             await axios.delete(
-                `http://localhost:8080/api/warehouses/${selectedWarehouse.id}`
+                `${import.meta.env.VITE_API_URL}/api/warehouses/${selectedWarehouse.id}`
             );
             setWarehouses((prev) =>
                 prev.filter((warehouse) => warehouse.id !== selectedWarehouse.id)
@@ -146,7 +146,6 @@ function WarehouseList() {
 
     return (
         <>
-        <Header />
         <div className="main-content">
         {warehouses ?  ( <div className="warehouse-list">
             <section className="warehouse-list__banner">

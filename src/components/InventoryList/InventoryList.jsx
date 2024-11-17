@@ -19,7 +19,7 @@ function InventoryList() {
   useEffect(() => {
     async function getInventoryList() {
       try {
-        const response = await axios.get(`http://${apiUrl}/api/inventories`);
+        const response = await axios.get(`${apiUrl}/api/inventories`);
         setInventoryData(response.data);
       } catch (error) {
         console.error("Failed to fetch inventory data:", error);

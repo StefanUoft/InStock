@@ -13,7 +13,7 @@ function Inventories() {
   useEffect(() => {
     const fetchInventories = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/inventories");
+        const response = await axios.get("${import.meta.env.VITE_API_URL}/api/inventories");
         setInventories(response.data);
       } catch (error) {
         console.error("Error fetching inventories:", error.message);

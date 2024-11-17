@@ -5,6 +5,7 @@ import EditWarehouse from "./components/EditWarehouse/EditWarehouse";
 import AddWarehouse from "./components/AddWarehouse/AddWarehouse"; 
 import EditInventoryItem from "./components/EditInventoryItem/EditInventoryItem";
 import AddNewInventoryItem from "./components/AddNewInventoryItem/AddNewInventoryItem";
+import InventoryItemDetails from "./components/InventoryItemDetails/InventoryItemDetails";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import InventoryList from "./components/InventoryList/InventoryList"; 
 import Header from "./components/Header/Header";
@@ -22,7 +23,7 @@ function App() {
           <Route path="/warehouses/edit/:id" element={<EditWarehouse/>}/>
           <Route path="/warehouses/add" element={<AddWarehouse/>}/>
           <Route path="/inventory" element={<InventoryList/>}/>
-          <Route path="/inventory/:id" element={<p>InventoryItemList</p>} /> 
+          <Route path="/inventory/:id" element={<InventoryItemDetails/>} /> 
           <Route path="/inventory/edit/:id" element={<EditInventoryItem/>} />
           <Route path="/inventory/add" element={<AddNewInventoryItem/>} />
           <Route path="*" element={<WarehouseList />} />

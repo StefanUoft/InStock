@@ -17,7 +17,7 @@ function Header() {
             <Link
               to="/"
               className={`nav__item ${
-                location.pathname === "/" ? "nav__item--active" : ""
+                (location.pathname === "/")||(location.pathname.includes("/warehouses")) ? "nav__item--active" : ""
               }`}
             >
               Warehouses
@@ -27,7 +27,7 @@ function Header() {
             <Link
               to="/inventory"
               className={`nav__item ${
-                location.pathname === "/inventory" ? "nav__item--active" : ""
+                location.pathname.includes("/inventory") ? "nav__item--active" : ""
               }`}
             >
               Inventory

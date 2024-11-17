@@ -15,7 +15,7 @@ function InventoryItemDetails() {
   useEffect(() => {
     async function getItemData() {
       try {
-        const response = await axios.get(`http://${apiUrl}/api/inventories/${id}`);
+        const response = await axios.get(`${apiUrl}/api/inventories/${id}`);
         setItemData(response.data);
       } catch (error) {
         console.error("Failed to fetch item data:", error);
@@ -33,7 +33,6 @@ function InventoryItemDetails() {
 
   return (
     <>
-    <Header/>
     <div className="main-content">
       {itemData ? (<div className="item-details">
 

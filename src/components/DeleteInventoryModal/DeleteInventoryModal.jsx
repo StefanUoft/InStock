@@ -18,7 +18,7 @@ function DeleteInventoryModal({
     try {
       if (!selectedInventory) return;
 
-      await axios.delete(`http://localhost:8080/api/inventories/${selectedInventory.id}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/inventories/${selectedInventory.id}`);
       setInventories((prev) =>
         prev.filter((inventory) => inventory.id !== selectedInventory.id)
       );
