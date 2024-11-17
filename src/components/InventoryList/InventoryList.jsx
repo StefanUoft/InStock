@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 
 function InventoryList() {
   const apiUrl = import.meta.env.VITE_API_URL;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedInventory, setSelectedInventory] = useState(null);
   const [inventoryData, setInventoryData] = useState([]);
 
   console.log(import.meta.env.VITE_API_URL);
@@ -27,6 +29,16 @@ function InventoryList() {
 
   const handleDelete = (event) => {
     event.preventDefault();
+  };
+
+  const openModal = (inventoryItem) => {
+    setSelectedInventory(inventoryItem);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedInventory(null);
   };
 
   return (
@@ -148,7 +160,7 @@ function InventoryList() {
             <div className="inventory__actions">
               <button
                 className="inventory__actions-button"
-                onClick={handleDelete}
+                onClick={() => openModal(item)}
               >
                 <img
                   src={deleteIcon}
@@ -171,6 +183,14 @@ function InventoryList() {
           </li>
         ))}
       </ul>
+      {isModalOpen && selectedInventory && (
+        <DeleteInventoryModal
+          isOpen={isModalOpen}
+          onRequestClose={closeModal}
+          selectedInventory={selectedInventory}
+          setInventories={setInventories}
+        />
+      )}
     </div>
   );
 }
