@@ -4,7 +4,7 @@ import { useState } from "react";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
 import axios from "axios";
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 function AddWarehouse() {
   const navigate = useNavigate();
@@ -97,7 +97,7 @@ function AddWarehouse() {
 
     if (isValid) {
       try {
-        const response = await axios.post(`${apiUrl}/api/warehouses`, formData);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/warehouses`, formData);
         console.log("Warehouse added successfully:", response.data);
         alert("Warehouse added successfully. Thank you!");
 

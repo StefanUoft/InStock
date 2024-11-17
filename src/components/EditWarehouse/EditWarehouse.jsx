@@ -5,7 +5,7 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import BackArrow from "../../assets/Icons/arrow_back-24px.svg";
 import axios from "axios";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 function EditWarehouse() {
   const { id } = useParams();
@@ -27,7 +27,7 @@ function EditWarehouse() {
   useEffect(() => {
     const fetchWarehouseData = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/api/warehouses`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
         setFormData((prevState) => ({
           ...prevState,
           ...response.data,
@@ -126,7 +126,7 @@ function EditWarehouse() {
         console.log("Form data before sending:", formData);
         try {
           const response = await axios.put(
-            `${apiUrl}/api/warehouses/</WAREHOUSE_ID>`,
+            `${import.meta.env.VITE_API_URL}/api/warehouses/${id}`,
             formData
           );
           console.log("Warehouse updated successfully:", response.data);
