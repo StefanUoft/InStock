@@ -24,7 +24,6 @@ function InventoryItemDetails() {
 
     getItemData();
   }, [apiUrl, id]);
-  console.log(itemData)
 
   //conditional class for styling
   const stockStatus = (status) => {
