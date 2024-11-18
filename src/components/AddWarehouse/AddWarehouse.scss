@@ -11,6 +11,7 @@
   width: 100%;
   border: 1px solid $cloud-color;
   border-radius: 0.1875rem;
+  @include page-content;
 
   &__header {
     display: flex;

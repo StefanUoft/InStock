@@ -8,6 +8,7 @@
   width: 100%;
   border-radius: 0.1875rem;
   justify-content: center;
+  @include page-content;
   &__header {
     display: flex;
     padding: 1.5rem 1rem;
