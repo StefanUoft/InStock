@@ -1,4 +1,7 @@
 // responsive design
+@use "./fonts" as*;
+@use "./variables" as *;
+
 
 @mixin tablet {
   @media (min-width: 768px) {
@@ -20,16 +23,17 @@
   font-weight: $titillium-semi-bold;
   font-size: 1.75rem;
   line-height: 2.25rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: 2rem;
-      line-height: 2.5rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
   }
 
   @include desktop {
     font-size: 2rem;
     line-height: 2.5rem;
-}
+  }
 }
 
 // h2 - subheader
@@ -38,106 +42,183 @@
   font-weight: $titillium-semi-bold;
   font-size: 1.25rem;
   line-height: 1.75rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: 1.5rem;
-      line-height: 2rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   @include desktop {
     font-size: 1.5rem;
     line-height: 2rem;
-}
+  }
 }
 
 // h3 - labels, links & buttons
 @mixin h3 {
   font-family: $titillium;
   font-weight: $titillium-semi-bold;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
   line-height: 1.25rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: .875rem;
-      line-height: 1.375rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
   }
 
   @include desktop {
-    font-size: .875rem;
+    font-size: 0.875rem;
     line-height: 1.375rem;
-}
+  }
 }
 
 // h4 - table header
 @mixin h4 {
   font-family: $titillium;
-  font-weight: $titillium-normal;
+  font-weight: $titillium-semi-bold;
   text-transform: uppercase;
-  font-size: .6875rem;
+  font-size: 0.6875rem;
   line-height: 1rem;
   color: $slate-color;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: .75rem;
-      line-height: 1.125rem;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
   }
 
   @include desktop {
-    font-size: .75rem;
+    font-size: 0.75rem;
     line-height: 1.125rem;
-}
+  }
 }
 
 // p1 - body large
 @mixin p1 {
   font-family: $titillium;
   font-weight: $titillium-normal;
-  font-size: .9375rem;
+  font-size: 0.9375rem;
   line-height: 1.625rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: 1rem;
-      line-height: 1.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
   }
 
   @include desktop {
     font-size: 1rem;
     line-height: 1.75rem;
-}
+  }
 }
 
 // p2 - body medium
 @mixin p2 {
   font-family: $titillium;
   font-weight: $titillium-normal;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
   line-height: 1.25rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: .875rem;
-      line-height: 1.375rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
   }
 
   @include desktop {
-    font-size: .875rem;
+    font-size: 0.875rem;
     line-height: 1.375rem;
-}
+  }
 }
 
 // p3 - body small
 @mixin p3 {
   font-family: $titillium;
   font-weight: $titillium-normal;
-  font-size: .6875rem;
+  font-size: 0.6875rem;
   line-height: 1rem;
+  overflow-y: hidden;
 
   @include tablet {
-      font-size: .75rem;
-      line-height: 1.125rem;
+    font-size: 0.75rem;
+    line-height: 1.125rem;
   }
 
   @include desktop {
-    font-size: .75rem;
+    font-size: 0.75rem;
     line-height: 1.125rem;
+  }
 }
+
+// buttons
+
+@mixin button {
+  font-family: $titillium;
+  width: fit-content;
+  border: none;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-radius: 1.25rem;
+  overflow-y: hidden;
+}
+
+@mixin button-primary {
+  @include button;
+  color: $white-color;
+  background-color: $indigo-color;
+  &:hover {
+    cursor: pointer;
+    background-color: $graphite-color;
+  }
+}
+
+@mixin button-secondary {
+  @include button;
+  color: $slate-color;
+  border: 0.0625rem solid $cloud-color;
+  background-color: $white-color;
+  &:hover {
+    cursor: pointer;
+    border: 0.0625rem solid $indigo-color;
+    color: $indigo-color;
+  }
+}
+
+@mixin button-delete {
+  @include button;
+  color: $white-color;
+  background-color: $red-color;
+  &:hover {
+    cursor: pointer;
+    background-color: $graphite-color;
+  }
+}
+
+@mixin page-content{
+  background-color: $white-color;
+  padding: 0;
+  border-radius: 0.25rem;
+  position:absolute;
+  left:0;
+  right:0;
+  width:85%;
+  height:auto;
+  z-index:1;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+
+  margin:-4rem auto 0.25rem auto; 
+
+  @include tablet{
+    margin:-6.75rem auto 0.25rem auto;
+  }
 }
