@@ -6,12 +6,10 @@ import sortIcon from "../../assets/icons/sort-24px.svg";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-
 function InventoryList() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [inventoryData, setInventoryData] = useState([]);
   const { id } = useParams();
-
   useEffect(() => {
     async function getInventoryList() {
       try {
@@ -25,7 +23,6 @@ function InventoryList() {
     }
     getInventoryList();
   }, [apiUrl, id]);
-
   return (
     <div className="details">
       <div className="details__titles">
