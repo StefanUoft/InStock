@@ -1,12 +1,18 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
 @use "/src/styles/partials/global" as *;
-
 .inventory {
   @include p2;
   background-color: $white-color;
   @include page-content;
-
+  &__header {
+    display: flex;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid $cloud-color;
+    @include tablet {
+      padding: 2rem;
+    }
+  }
   &__banner {
     display: flex;
     flex-direction: column;
@@ -15,28 +21,22 @@
     padding: 1rem;
     text-align: left;
     border-bottom: 0.0625rem solid $cloud-color;
-
     &-input {
       @include p2;
     }
-
     @include tablet {
       display: flex;
       flex-direction: row;
     }
-
     &-title {
       @include h1;
       align-self: flex-start;
       padding-top: 1rem;
       padding-bottom: 0.25rem;
-
       @include tablet {
         padding-bottom: 0.5rem;
       }
-
     }
-
     &-form {
       height: 2.375rem;
       width: 100%;
@@ -48,42 +48,34 @@
       align-content: center;
       align-items: center;
       border: 0.0625rem solid $cloud-color;
-
       @include tablet {
         max-width: 15rem;
         align-self: flex-end;
         margin-right: 1rem;
       }
-
       @include desktop {
         max-width: 15rem;
       }
     }
-
     &-input {
       border: none;
       outline: none;
       flex-grow: 1;
       margin-left: 0.5rem;
     }
-
     &-icon {
       margin-right: 0.5rem;
     }
-
     &-button {
       @include button_primary;
       width: 100%;
-
       @include tablet {
         width: 8rem;
       }
     }
   }
-
   &__titles {
     display: none;
-
     @include tablet {
       @include h4;
       display: flex;
@@ -94,27 +86,25 @@
       background-color: $light-grey-color;
     }
   }
-
   &__title {
     @include h4;
     display: flex;
     align-items: center;
     align-content: center;
     width: 15%;
-
     &:last-child {
       justify-content: flex-end;
       padding-right: 1rem;
     }
   }
-
   &__list {
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: auto;
+    @include tablet{
+      gap:0;
+    }
   }
-
   &__item {
     @include h3;
     display: flex;
@@ -126,11 +116,9 @@
     gap: 1rem;
     padding: 1rem;
     border-bottom: 0.0625rem solid $cloud-color;
-
     &:hover {
       background-color: rgba($indigo-color, 0.07);
     }
-
     @include tablet {
       flex-direction: row;
       justify-content: space-between;
@@ -139,37 +127,28 @@
       gap: 0;
       padding: 1rem;
     }
-
     &-title {
-     
-
       @include tablet {
         display: none;
       }
     }
-
     &-wrapper {
       display: flex;
       flex-direction: column;
       width: 45%;
-
       @include tablet {
         width: 15%;
-
         &:nth-child(1) {
           order: -2;
         }
-
         &:nth-child(3) {
           order: -1;
         }
-
         &:nth-child(4) {
           width: 15%;
         }
       }
     }
-
     &-value {
       @include p2;
       display: flex;
@@ -178,22 +157,17 @@
       width: 100%;
       width: fit-content;
       text-transform: none;
-
       @include tablet {
         font-weight: 600;
       }
-
       &--category {
         @include p2;
         color: $black-color;
-
       }
-
       &--quantity {
         @include p2;
         color: $black-color;
       }
-
       &--in-stock {
         @include h4;
         color: $green-color;
@@ -203,7 +177,6 @@
         padding: 0rem 0.5rem;
         height: 1.5rem;
       }
-
       &--out-of-stock {
         @include h4;
         color: $red-color;
@@ -213,28 +186,23 @@
         padding: 0rem 0.5rem;
         height: 1.5rem;
       }
-
       &-name {
         @include h3;
         color: $indigo-color;
-
       }
     }
   }
-
   &__actions {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding-right: 1rem;
     padding-left: 1rem;
-
     @include tablet {
       justify-content: flex-end;
       gap: 1rem;
       width: 15%;
     }
-
     &-button {
       all: unset;
       cursor: pointer;

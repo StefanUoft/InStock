@@ -3,9 +3,6 @@ import "./AddNewInventoryItem.scss";
 import backArrow from "../../assets/Icons/arrow_back-24px.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
-
 const AddNewInventoryItem = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -16,21 +13,18 @@ const AddNewInventoryItem = () => {
   const [warehouse, setWarehouse] = useState("default");
   const [warehouses, setWarehouses] = useState([]);
   const [errors, setErrors] = useState({});
-
-  // const backClick = (event) => {
-  //   event.preventDefault();
-  //   navigate("/inventory");
-  // };
-
-  // const cancelClick = (event) => {
-  //   event.preventDefault();
-  //   navigate("/inventory");
-  // };
-
+  const handleCancelClick = (event) => {
+    event.preventDefault();
+    if (window.confirm("Are you sure you want to cancel?")) {
+    navigate("/inventory");
+  }
+};
   useEffect(() => {
     const fetchWarehouses = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/warehouses`
+        );
         console.log("Response from /api/warehouses:", response);
         setWarehouses(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
@@ -38,10 +32,8 @@ const AddNewInventoryItem = () => {
         setWarehouses([]);
       }
     };
-  
     fetchWarehouses();
   }, []);
-
   const isFormValid = () => {
     const newErrors = {};
     const validateField = (value, fieldName, defaultValue = "") => {
@@ -49,21 +41,17 @@ const AddNewInventoryItem = () => {
         newErrors[fieldName] = "This field is required";
       }
     };
-
     validateField(name, "name");
     validateField(description, "description");
     validateField(quantity, "quantity");
     validateField(category, "category", "default");
     validateField(warehouse, "warehouse", "default");
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
   const handleAdd = async (event) => {
     event.preventDefault();
     if (!isFormValid()) return;
-
     try {
       const selectedWarehouse = warehouses.find(
         (wh) => wh.warehouse_name === warehouse
@@ -72,7 +60,6 @@ const AddNewInventoryItem = () => {
         alert("Invalid warehouse selected");
         return;
       }
-
       const newItem = {
         warehouse_id: selectedWarehouse.id,
         item_name: name,
@@ -81,12 +68,10 @@ const AddNewInventoryItem = () => {
         status: status,
         quantity: status === "In Stock" ? quantity : 0,
       };
-
-      const addItem = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/api/inventories`,
         newItem
       );
-
       alert("Item added successfully");
       navigate("/inventory");
     } catch (error) {
@@ -94,17 +79,19 @@ const AddNewInventoryItem = () => {
       alert("Failed to add the item. Please try again.");
     }
   };
-
   return (
     <div className="add-item">
       <div className="add-item__header">
         <button className="add-item__header-back-button">
-          <img src={backArrow} alt="back button" /* onClick={backClick} */ />
+          <img
+            src={backArrow}
+            alt="back button"
+            onClick={() => navigate("/inventory")}
+          />
         </button>
         <h1 className="add-item__header-title">Add New Inventory Item</h1>
       </div>
-
-      <form className="add-item__forms" action="">
+      <form className="add-item__forms">
         <div className="add-item__details-form">
           <div className="add-item__item-details">
             <h2 className="add-item__item-details-title">Item Details</h2>
@@ -119,21 +106,21 @@ const AddNewInventoryItem = () => {
               />
             </div>
           </div>
-
           <div className="add-item__form-container">
             <label className="add-item__label">Description</label>
             <textarea
+             type="text"
               className="add-item__input-description"
-              row={6}
+              rows={6}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Please enter a brief item description..."
             />
           </div>
-
           <div className="add-item__form-container">
             <label className="add-item__label">Category</label>
             <select
+                type="text"
               className="add-item__input-selection"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -151,11 +138,10 @@ const AddNewInventoryItem = () => {
           <h2 className="add-item__availability-title">Item Availability</h2>
           <div className="add-item__form-container">
             <label className="add-item__label">Status</label>
-
             <div className="add-item__status">
               <label className="add-item__status-radio">
                 <input
-                  type="radio"
+                 type="radio"
                   name="status"
                   value="In Stock"
                   checked={status === "In Stock"}
@@ -164,7 +150,6 @@ const AddNewInventoryItem = () => {
                 />
                 In Stock
               </label>
-
               <label className="add-item__status-radio">
                 <input
                   type="radio"
@@ -178,41 +163,40 @@ const AddNewInventoryItem = () => {
               </label>
             </div>
           </div>
-
           {status === "In Stock" && (
-            <div className="add-item__form-container">
-              <label className="add-item__label">Quantity</label>
-              <input
-                type="number"
-                className="add-item__quantity-input"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                placeholder="0"
-              />
-            </div>
-          )}
-
-          {status === "In Stock" && (
-            <div className="add-item__form-container">
-              <label className="add-item__label">Warehouse</label>
-              <select
-                className="add-item__input-selection"
-                value={warehouse}
-                onChange={(e) => setWarehouse(e.target.value)}
-              >
-                <option value="default">Please select</option>
-                {warehouses.map((wh) => (
-                  <option key={wh.id} value={wh.warehouse_name}>
-                    {wh.warehouse_name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <>
+              <div className="add-item__form-container">
+                <label className="add-item__label">Quantity</label>
+                <input
+                  type="number"
+              className="add-item__quantity-input"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Number(e.target.value))}
+                  placeholder="0"
+                />
+              </div>
+              <div className="add-item__form-container">
+                <label className="add-item__label">Warehouse</label>
+                <select
+                  type="text"
+              className="add-item__input-selection"
+                  value={warehouse}
+                  onChange={(e) => setWarehouse(e.target.value)}
+                >
+                  <option value="default">Please select</option>
+                  {warehouses.map((wh) => (
+                    <option key={wh.id} value={wh.warehouse_name}>
+                      {wh.warehouse_name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
           )}
         </div>
       </form>
       <div className="add-item__form-buttons">
-        <button className="add-item__button-cancel" /* onClick={cancelClick} */>
+        <button className="add-item__button-cancel" onClick={handleCancelClick}>
           Cancel
         </button>
         <button className="add-item__button-add" onClick={handleAdd}>
@@ -222,5 +206,4 @@ const AddNewInventoryItem = () => {
     </div>
   );
 };
-
 export default AddNewInventoryItem;
