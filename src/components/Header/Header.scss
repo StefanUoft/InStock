@@ -3,70 +3,94 @@
 @use "/src/styles/partials/mixins";
 @use "/src/styles/partials/global";
 
-.nav {
-  background-color: variables.$graphite-color;
-  text-align: center;
-  height: 13rem;
-
-  &__logo {
-    width: 9rem;
-    align-items: center;
-    padding-top: 1.75rem;
-    padding-bottom:0.25rem;
-  }
-
-  &__item {
-    @include mixins.h3;
-    color: variables.$cloud-color;
-    margin:0 1.25rem;
-    padding:0 2.5rem;
-
-    &--active {
-      @include mixins.button;
-      @include mixins.h3;
-      color: variables.$white-color;
-      background-color: variables.$black-color;
-      padding:0 2.5rem;
-      margin:0 1.25rem;
-    }
-  }
+.header {
+  display: flex;
+  width: 100%;
 
   @include mixins.tablet {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 12rem;
-    padding: 1.5rem 2rem;
-
-    &__logo {
-        padding: 0;
-      }
   }
 
-  @include mixins.desktop {
+  &__nav {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 12rem;
-    padding: 1.5rem 4rem;
+    flex-direction: column;
+    width: 100%;
+    background-color: variables.$graphite-color;
+    text-align: center;
+    height: 13rem;
 
-    &__logo {
+    &-link {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-top: 2rem;
+
+      @include mixins.tablet {
+        width: unset;
+        margin-bottom: auto;
         padding: 0;
       }
+    }
+
+    &-logo {
+      width: 9rem;
+      align-items: center;
+      margin-left: 0.5rem; 
+    }
+
+    &-item {
+      @include mixins.h3;
+      color: variables.$cloud-color;
+      margin: 0 1.25rem;
+      padding: 0 2.5rem;
+      flex: 1;
+
+      &--active {
+        @include mixins.button;
+        @include mixins.h3;
+        color: variables.$white-color;
+        background-color: variables.$black-color;
+        padding: 0 2.5rem;
+        margin: 0 1.25rem;
+      }
+    }
+
+    @include mixins.tablet {
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 12rem;
+      padding: 1.5rem 2rem;
+
+      &__logo {
+        padding: 0;
+      }
+    }
+
+    @include mixins.desktop {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 12rem;
+      padding: 1.5rem 4rem;
+    }
   }
 }
 
 ul {
   display: flex;
-  justify-content:center;
+  justify-content: center;
+  width: 100%;
   align-items: center;
   list-style-type: none;
   padding: 1rem 0;
   margin: 0;
 
   @include mixins.tablet {
+    width: unset;
     padding: 0;
     gap: 1.5rem;
+    margin-bottom: auto;
   }
 
   @include mixins.desktop {
@@ -76,9 +100,11 @@ ul {
 }
 
 li {
+  display: flex;
   margin: 0;
+  flex: 1;
 }
 
 a {
-    text-decoration: none;
-  }
+  text-decoration: none;
+}

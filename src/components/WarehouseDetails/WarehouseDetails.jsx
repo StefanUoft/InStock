@@ -58,10 +58,10 @@ function WarehouseDetails() {
         <div className="warehouse__info-wrapper warehouse__info-wrapper--name">
           <h4 className="warehouse__info-title">CONTACT NAME:</h4>
           <p className="warehouse__info-value">
-            {" "}
-            {warehouseData.contact_position}
+            {warehouseData.contact_name}
+           
           </p>
-          <p className="warehouse__info-position">Warehouse Manager</p>
+          <p className="warehouse__info-position"> {warehouseData.contact_position}</p>
         </div>
         <div className="warehouse__info-wrapper warehouse__info-wrapper--contact">
           <h4 className="warehouse_info-title">CONTACT INFORMATION:</h4>

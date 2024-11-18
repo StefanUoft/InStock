@@ -55,7 +55,7 @@
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: .0625rem solid $cloud-color;
+    border-top: .0625rem solid $cloud-color;
 
     &:hover {
       background-color: rgba($indigo-color, 0.07);
