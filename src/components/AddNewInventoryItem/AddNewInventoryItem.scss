@@ -14,6 +14,7 @@
     padding: 1.5rem 1rem;
     border-bottom: 1px solid $cloud-color;
     @include tablet {
+      height:6.75rem;
       padding: 2rem;
     }
   }
@@ -21,6 +22,7 @@
     border: none;
     background-color: transparent;
     padding-right: 0.5rem;
+    overflow-y:hidden;
   }
   &__header-title {
     @include h1;
@@ -110,7 +112,7 @@
     @include tablet {
       justify-content: flex-end;
       padding-left: 5rem;
-      padding-right: 0.5rem;
+      padding-right: 3rem;
     }
   }
   &__button-cancel {

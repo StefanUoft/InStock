@@ -3,9 +3,7 @@
 @use "/src/styles/partials/global" as *;
 .details {
   @include p2;
-  @include tablet {
-    @include h4;
-  }
+
   &__titles {
     display: none;
     @include tablet {
@@ -36,6 +34,8 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y:auto;
+    height:100%;
   }
   &__item {
     @include h3;
@@ -47,7 +47,7 @@
     justify-content: center;
     gap: 1rem;
     padding: 1rem;
-    border-top: .0625rem solid $cloud-color;
+    border-bottom: .0625rem solid $cloud-color;
     &:hover {
       background-color: rgba($indigo-color, 0.07);
     }
@@ -84,7 +84,7 @@
       }
     }
     &-value {
-      @include h4;
+      @include p2;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -98,30 +98,26 @@
       &--category{
       @include p2;
       color: $black-color;
-      text-transform: lowercase;
-        &::first-letter {
-          text-transform: uppercase;
-        }
+    
       }
       &--quantity{
         @include p2;
         color: $black-color;
       }
       &--in-stock {
+        text-transform:uppercase;
         color: $green-color;
         background-color: rgba($green-color, 0.07);
       }
       &--out-of-stock {
+        text-transform:uppercase;
         color: $red-color;
         background-color: rgba($red-color, 0.07);
       }
       &-name {
         @include h3;
         color: $indigo-color;
-        text-transform: lowercase;
-        &::first-letter {
-          text-transform: uppercase;
-        }
+        
       }
     }
   }

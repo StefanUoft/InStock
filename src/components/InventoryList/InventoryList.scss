@@ -5,12 +5,13 @@
   @include p2;
   background-color: $white-color;
   @include page-content;
+  height:auto;
   &__header {
     display: flex;
     padding: 1.5rem 1rem;
     border-bottom: 1px solid $cloud-color;
     @include tablet {
-      padding: 2rem;
+      padding: 0.5rem 2rem;
     }
   }
   &__banner {
@@ -19,14 +20,21 @@
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    
     text-align: left;
-    border-bottom: 0.0625rem solid $cloud-color;
+    
     &-input {
       @include p2;
     }
     @include tablet {
       display: flex;
       flex-direction: row;
+      flex-wrap:wrap;
+      align-content:center;
+      align-items:center;
+      height:6.75rem;
+      margin:0rem 1.5rem 0rem 1.5rem;
+      padding:0
     }
     &-title {
       @include h1;
@@ -34,7 +42,7 @@
       padding-top: 1rem;
       padding-bottom: 0.25rem;
       @include tablet {
-        padding-bottom: 0.5rem;
+        padding:0 0 0 0.5rem;
       }
     }
     &-form {
@@ -50,11 +58,10 @@
       border: 0.0625rem solid $cloud-color;
       @include tablet {
         max-width: 15rem;
-        align-self: flex-end;
-        margin-right: 1rem;
+        margin: 0rem 1rem 0rem auto
       }
       @include desktop {
-        max-width: 15rem;
+        max-width: 22rem;
       }
     }
     &-input {
@@ -82,7 +89,7 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
+      padding: 0.5rem 1rem 0.5rem 2rem;
       background-color: $light-grey-color;
     }
   }
@@ -103,6 +110,7 @@
     flex-direction: column;
     @include tablet{
       gap:0;
+      
     }
   }
   &__item {
@@ -115,17 +123,20 @@
     justify-content: flex-end;
     gap: 1rem;
     padding: 1rem;
-    border-bottom: 0.0625rem solid $cloud-color;
+    border-top: 0.0625rem solid $cloud-color;
     &:hover {
       background-color: rgba($indigo-color, 0.07);
     }
     @include tablet {
+      border-bottom: .0625rem solid $cloud-color;
+      border-top:none;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
       width: 100%;
       gap: 0;
       padding: 1rem;
+      padding-left:2rem;
     }
     &-title {
       @include tablet {
@@ -172,7 +183,7 @@
         @include h4;
         color: $green-color;
         background-color: rgba($green-color, 0.07);
-        text-transform: uppercase;
+        
         border-radius: 1.25rem;
         padding: 0rem 0.5rem;
         height: 1.5rem;
@@ -181,7 +192,7 @@
         @include h4;
         color: $red-color;
         background-color: rgba($red-color, 0.07);
-        text-transform: uppercase;
+      
         border-radius: 1.25rem;
         padding: 0rem 0.5rem;
         height: 1.5rem;
@@ -189,6 +200,7 @@
       &-name {
         @include h3;
         color: $indigo-color;
+        white-space:nowrap;
       }
     }
   }
