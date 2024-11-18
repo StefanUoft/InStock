@@ -8,6 +8,7 @@ import axios from "axios";
 function EditWarehouse() {
   const { id } = useParams();
   const navigate = useNavigate();
+  
 
   const [formData, setFormData] = useState({
     warehouse_name: "",
