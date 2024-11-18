@@ -110,7 +110,7 @@ const EditInventoryItem = () => {
           className="edit-item__header-back-button"
           onClick={() => navigate("/inventory")}
         >
-          <img src={BackArrow} alt="back button" />
+          <img src={backArrow} alt="back button" />
         </button>
         <h1 className="edit-item__header-title">Edit Inventory Item</h1>
       </div>
