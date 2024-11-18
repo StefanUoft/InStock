@@ -130,7 +130,7 @@ function WarehouseList() {
                             </td>
                             <td>
                                 <div className="warehouse-list__table__actions">
-                                    {deleteButton(wh.warehouse_name)}
+                                    {deleteButton(wh)}
                                     <Link to={`/warehouses/edit/${wh.id}`}>
                                         <img src={editIcon} alt="Edit icon" />
                                     </Link>
