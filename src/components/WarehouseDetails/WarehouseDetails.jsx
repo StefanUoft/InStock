@@ -5,12 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import WarehouseInventoryList from "../WarehouseInventoryList/WarehouseInventoryList";
-
 function WarehouseDetails() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [warehouseData, setWarehouseData] = useState([]);
   const { id } = useParams();
-
   useEffect(() => {
     async function getWarehouseData() {
       try {
@@ -20,11 +18,9 @@ function WarehouseDetails() {
         console.error("Failed to fetch warehouse data:", error);
       }
     }
-
     getWarehouseData();
   }, [apiUrl, id]);
   console.log(warehouseData);
-
   return (
     <div className="warehouse">
       <section className="warehouse__details">
@@ -58,10 +54,9 @@ function WarehouseDetails() {
         <div className="warehouse__info-wrapper warehouse__info-wrapper--name">
           <h4 className="warehouse__info-title">CONTACT NAME:</h4>
           <p className="warehouse__info-value">
-            {" "}
-            {warehouseData.contact_position}
+            {warehouseData.contact_name}
           </p>
-          <p className="warehouse__info-position">Warehouse Manager</p>
+          <p className="warehouse__info-position"> {warehouseData.contact_position}</p>
         </div>
         <div className="warehouse__info-wrapper warehouse__info-wrapper--contact">
           <h4 className="warehouse_info-title">CONTACT INFORMATION:</h4>
@@ -73,5 +68,4 @@ function WarehouseDetails() {
     </div>
   );
 }
-
 export default WarehouseDetails;

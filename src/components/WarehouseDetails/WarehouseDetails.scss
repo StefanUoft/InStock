@@ -1,14 +1,13 @@
 @use "/src/styles/partials/variables" as *;
 @use "/src/styles/partials/mixins" as *;
 @use "/src/styles/partials/global" as *;
-
 .warehouse {
+  @include page-content;
   @include p1;
   display: flex;
   flex-direction: column;
   border-bottom: 0.0625rem solid $cloud-color;
   background-color: $white-color;
-
   &__details {
     border-bottom: 0.0625rem solid $cloud-color;
     display: flex;
@@ -16,17 +15,14 @@
     width: 100%;
     align-items: center;
     padding: 2rem 2rem 1.5rem 2rem;
-
     &-arrow {
       margin-right: 0.5rem;
       padding-top: 1rem;
     }
-
     &-name {
       @include h1;
       color: $black-color;
     }
-
     &-icon {
       display: flex;
       align-items: center;
@@ -37,17 +33,14 @@
       height: 2.25rem;
       border-radius: 50%;
       margin-left: auto;
-
       @include tablet {
         width: 5rem;
         border-radius: 1.5rem;
         justify-content: space-between;
         padding: 0 0.75rem;
       }
-
       &-text {
         display: none;
-
         @include tablet {
           display: flex;
           color: white;
@@ -55,7 +48,6 @@
       }
     }
   }
-
   &__info {
     @include p3;
     display: flex;
@@ -63,19 +55,19 @@
     flex-wrap: wrap;
     padding: 1rem;
     gap: 1rem;
-
+    height: 30rem;
     @include tablet {
       flex-wrap: nowrap;
-      padding: 1 2 1 2;
+      padding: 1rem 2rem;
+      height: 10rem;
     }
-  
     &-wrapper {
       display: flex;
       flex-direction: column;
       width: 45%;
-
       @include tablet {
         width: 100%;
+        justify-content: center;
       }
       &--name {
         padding-top: 1rem;
@@ -87,10 +79,9 @@
           margin-left: 7rem;
         }
       }
-
       &--address {
         width: 100%;
-        @include desktop{
+        @include desktop {
           padding-left: 1rem;
           padding-right: 3rem;
         }

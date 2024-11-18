@@ -1,46 +1,38 @@
 @use "./styles/partials/mixins" as *;
 @use "./styles/partials/variables" as *;
-
-
-
 a {
-    text-decoration: none; 
-    color: inherit;        
-    font: inherit;    
-}  
-
+  text-decoration: none;
+  color: inherit;
+  font: inherit;
+}
 body {
-    min-width: 20rem;
-  } 
-
-#root{
-    width:100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 20rem;
+  justify-content: space-between;
+  background-color: $light-grey-color;
 }
-  
-h1{
-    @include h1;
+#root {
+  width: 100%;
 }
-
-h2{
-    @include h2
+h1 {
+  @include h1;
 }
-
-h3{
-    @include h3
+h2 {
+  @include h2;
 }
-
-h4{
-    @include h4
+h3 {
+  @include h3;
 }
-
-.p1{
-    @include p1
+h4 {
+  @include h4;
 }
-
-.p2{
-    @include p2
+.p1 {
+  @include p1;
 }
-
-.p3{
-    @include p3
+.p2 {
+  @include p2;
+}
+.p3 {
+  @include p3;
 }
