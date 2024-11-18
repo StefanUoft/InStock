@@ -117,6 +117,7 @@ const EditInventoryItem = () => {
 
       <form className="edit-item__forms">
         <div className="edit-item__details-form">
+          <h2 className="edit-item__item-details-title">Item Details</h2>
           <div className="edit-item__form-container">
             <label className="edit-item__label">Item Name</label>
             <input

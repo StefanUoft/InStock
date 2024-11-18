@@ -120,6 +120,7 @@
   &__status-radio{
     display: flex;
     gap: 0.5rem;
+    @include p2;
   }
 
 
