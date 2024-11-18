@@ -25,7 +25,7 @@ function InventoryList() {
         console.error("Failed to fetch inventory data:", error);
       }
     }
-    console.log(getInventoryList());
+    getInventoryList();
   }, [apiUrl]);
 
   const openModal = (inventoryItem) => {

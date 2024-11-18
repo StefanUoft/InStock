@@ -28,9 +28,17 @@
   color: variables.$graphite-color;
   z-index: 1001;
   overflow-y: hidden;
+  display:flex;
+  flex-direction:column;
+  flex-grow:1;
+  justify-content:space-between;
 
   &:focus {
     outline: none;
+  }
+
+  &__top{
+    overflow-y:hidden;
   }
 
   &__exit-button {
@@ -63,9 +71,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    align-self:flex-end;
     gap: 1rem;
     width: 100%; 
-    padding-top: 29rem;
+    //height:100%;
+    //padding-top: 29rem;
     overflow-y: hidden;
   }
 
@@ -89,10 +99,10 @@
   }
 
   @include mixins.tablet {
-    width: 40rem;
+    max-width: 40rem;
     border-radius: 0.25rem;
     padding: 3rem;
-    height: 17rem;
+    height: 18.9rem;
 
     &__exit-button {
       top: 1rem;

@@ -13,16 +13,7 @@
   @include p1;
   display: flex;
   flex-direction: column;
-  border-bottom: 0.0625rem solid $cloud-color;
-  background-color: $white-color;
-  padding: 0rem;
-  border-radius: 0.25rem;
-  position:absolute;
-  left:0;
-  right:0;
-  margin:-4.75rem auto 0.25rem auto;
-  width:80%;
-  z-index:1;
+ @include page-content;
 
   &__banner {
     border-bottom: 0.0625rem solid $cloud-color;
@@ -37,6 +28,7 @@
     
     @include tablet{
       padding: 2rem 3rem;
+      height:6.75rem;
     }
 
     &__left{

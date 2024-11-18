@@ -11,7 +11,7 @@
 .warehouse-list {
   height: auto;
   @include page-content;
-
+  height:75%;
   &__header {
     @include h4;
   
@@ -95,7 +95,8 @@
 
     @include tablet{
       flex-direction:row;
-      align-items:center;align-content: center;
+      align-items:center;
+      align-content: center;
       justify-content:flex-end;
     }
   }
@@ -110,7 +111,7 @@
     
       &__right{
         display:flex;
-        justify-content:flex-end;
+        justify-content:center;
         padding-right:2rem;
         text-align:right;
             }

@@ -8,13 +8,16 @@
   flex-direction: column;
   border-bottom: 0.0625rem solid $cloud-color;
   background-color: $white-color;
+  height:auto;
   &__details {
+    overflow-y:hidden;
     border-bottom: 0.0625rem solid $cloud-color;
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     padding: 2rem 2rem 1.5rem 2rem;
+    height:6.75rem;
     &-arrow {
       margin-right: 0.5rem;
       padding-top: 1rem;
@@ -55,11 +58,12 @@
     flex-wrap: wrap;
     padding: 1rem;
     gap: 1rem;
-    height: 30rem;
+    border-bottom: 0.0625rem solid $cloud-color;
     @include tablet {
       flex-wrap: nowrap;
       padding: 1rem 2rem;
       height: 10rem;
+      border-bottom: none;
     }
     &-wrapper {
       display: flex;
