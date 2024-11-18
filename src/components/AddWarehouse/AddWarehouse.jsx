@@ -98,7 +98,6 @@ function AddWarehouse() {
 
   const handleAddClick = async (e) => {
     e.preventDefault();
-
     const newErrors = {};
     let isValid = true;
 
@@ -267,7 +266,7 @@ function AddWarehouse() {
         >
           Cancel
         </button>
-        <button type="submit" className="add-warehouse__button-add">
+        <button onClick={handleAddClick} type="submit" className="add-warehouse__button-add">
           + Add Warehouse
         </button>
       </div>

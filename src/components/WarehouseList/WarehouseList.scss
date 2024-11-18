@@ -5,27 +5,16 @@
 .main-content{
   background-color: $light-grey-color;
   width:100%;
-  height:100vh;
+  height:auto;
 }
 
 .warehouse-list {
-  background-color: $white-color;
-  padding: 0;
-  border-radius: 0.25rem;
-  position:absolute;
-  left:0;
-  right:0;
-  margin:-4rem auto 0.25rem auto;
-  width:90%;
-  z-index:1;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-
-  @include tablet{
-    margin:-6.75rem auto 0.25rem auto;
-  }
+  height: auto;
+  @include page-content;
 
   &__header {
     @include h4;
+  
   }
 
   &__link {
@@ -56,6 +45,7 @@
       justify-content:flex-start;
       width:100%;
       padding-bottom:0.5rem;
+      overflow-y:hidden;
       @include tablet{
       h1{padding:0.25rem 0.5rem;}
       width:18rem;}
@@ -99,6 +89,7 @@
         background-color: $white-color;
         flex-grow: 1;
         margin-left: 0.5rem;
+        @include p2;
       }
     }
 

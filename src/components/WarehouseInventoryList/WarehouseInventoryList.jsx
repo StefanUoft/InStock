@@ -16,7 +16,7 @@ function InventoryList() {
     async function getInventoryList() {
       try {
         const response = await axios.get(
-          `http://${apiUrl}/api/warehouses/${id}/inventories`
+          `${apiUrl}/api/warehouses/${id}/inventories`
         );
         setInventoryData(response.data);
       } catch (error) {

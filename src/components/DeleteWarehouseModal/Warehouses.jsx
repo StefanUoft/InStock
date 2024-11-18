@@ -14,7 +14,7 @@ function Warehouses() {
     const fetchWarehouses = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/api/warehouses"
+          "${import.meta.env.VITE_API_URL}/api/warehouses"
         );
 
         if (Array.isArray(response.data)) {
