@@ -20,7 +20,9 @@ const EditInventoryItem = () => {
   useEffect(() => {
     const fetchItemDetails = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/inventories/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/inventories/${id}`
+        );
         const item = response.data;
         setName(item.item_name);
         setDescription(item.description);
@@ -35,7 +37,9 @@ const EditInventoryItem = () => {
 
     const fetchWarehouses = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/warehouses`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/warehouses`
+        );
         setWarehouses(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error("Error fetching warehouses:", error);
@@ -50,9 +54,12 @@ const EditInventoryItem = () => {
     const newErrors = {};
     if (!name) newErrors.name = "Item name is required";
     if (!description) newErrors.description = "Description is required";
-    if (!category || category === "default") newErrors.category = "Category is required";
-    if (!warehouse || warehouse === "default") newErrors.warehouse = "Warehouse is required";
-    if (status === "In Stock" && (quantity <= 0 || !quantity)) newErrors.quantity = "Quantity is required";
+    if (!category || category === "default")
+      newErrors.category = "Category is required";
+    if (!warehouse || warehouse === "default")
+      newErrors.warehouse = "Warehouse is required";
+    if (status === "In Stock" && (quantity <= 0 || !quantity))
+      newErrors.quantity = "Quantity is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -63,7 +70,9 @@ const EditInventoryItem = () => {
     if (!isFormValid()) return;
 
     try {
-      const selectedWarehouse = warehouses.find((wh) => wh.warehouse_name === warehouse);
+      const selectedWarehouse = warehouses.find(
+        (wh) => wh.warehouse_name === warehouse
+      );
       if (!selectedWarehouse) {
         alert("Invalid warehouse selected");
         return;
@@ -78,7 +87,10 @@ const EditInventoryItem = () => {
         quantity: status === "In Stock" ? quantity : 0,
       };
 
-      await axios.put(`${import.meta.env.VITE_API_URL}/api/inventories/${id}`, updatedItem);
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/inventories/${id}`,
+        updatedItem
+      );
       alert("Item updated successfully");
       navigate("/inventory");
     } catch (error) {
@@ -94,8 +106,11 @@ const EditInventoryItem = () => {
   return (
     <div className="edit-item">
       <div className="edit-item__header">
-        <button className="edit-item__header-back-button" /* onClick={handleCancel} */>
-          <img src={backArrow} alt="back button" />
+        <button
+          className="edit-item__header-back-button"
+          onClick={() => navigate("/inventory")}
+        >
+          <img src={BackArrow} alt="back button" />
         </button>
         <h1 className="edit-item__header-title">Edit Inventory Item</h1>
       </div>
@@ -120,7 +135,9 @@ const EditInventoryItem = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            {errors.description && <div className="error-message">{errors.description}</div>}
+            {errors.description && (
+              <div className="error-message">{errors.description}</div>
+            )}
           </div>
 
           <div className="edit-item__form-container">
@@ -137,7 +154,9 @@ const EditInventoryItem = () => {
               <option value="Accessories">Accessories</option>
               <option value="Health">Health</option>
             </select>
-            {errors.category && <div className="error-message">{errors.category}</div>}
+            {errors.category && (
+              <div className="error-message">{errors.category}</div>
+            )}
           </div>
         </div>
 
@@ -176,7 +195,9 @@ const EditInventoryItem = () => {
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
                 />
-                {errors.quantity && <div className="error-message">{errors.quantity}</div>}
+                {errors.quantity && (
+                  <div className="error-message">{errors.quantity}</div>
+                )}
               </div>
             )}
           </div>
@@ -195,13 +216,15 @@ const EditInventoryItem = () => {
                 </option>
               ))}
             </select>
-            {errors.warehouse && <div className="error-message">{errors.warehouse}</div>}
+            {errors.warehouse && (
+              <div className="error-message">{errors.warehouse}</div>
+            )}
           </div>
         </div>
       </form>
 
       <div className="edit-item__form-buttons">
-        <button className="edit-item__button-cancel" onClick={handleCancel} >
+        <button className="edit-item__button-cancel" onClick={handleCancel}>
           Cancel
         </button>
         <button className="edit-item__button-save" onClick={handleSave}>

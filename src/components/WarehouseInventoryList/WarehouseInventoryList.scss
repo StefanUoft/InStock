@@ -4,6 +4,7 @@
 
 .details {
   @include p2;
+  @include page-content;
 
   @include tablet {
     @include h4;

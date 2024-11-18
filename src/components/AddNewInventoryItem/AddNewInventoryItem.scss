@@ -9,6 +9,7 @@
   width: 100%;
   border-radius: 0.1875rem;
   justify-content: center;
+  @include page-content;
 
   &__header {
     display: flex;
@@ -27,6 +28,15 @@
 
   &__header-title {
     @include h1;
+    height: 5rem;
+
+    @include tablet {
+      height: auto;
+    }
+
+    @include desktop {
+      height: auto;
+    }
   }
 
   &__forms {
@@ -82,6 +92,7 @@
     border: 1px solid $cloud-color;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
+    @include p2;
 
     @include tablet{
       margin-bottom: 1.5rem;
@@ -94,6 +105,7 @@
     padding: 0.5rem 1rem;
     line-height: 3rem;
     margin-bottom: 0.5rem;
+    @include p2;
   }
 
   &__input-selection {
